@@ -1,0 +1,220 @@
+
+	Os Dicionários são uma forma de coleção em python, ou seja, mais uma forma de guardar informações em uma única varíavel.
+A diferença mais proeminente quando falamos de dicionário (dict) é que ele não trabalha com indice, mas sim com chaves/valor.
+Aceita qualquer tipo de dados, assim como as litas e as tuplas. Além disso ele é representado por chaves {}, a chave é separada do valor
+por meio de dois pontos :  .
+
+obs:  Simm, anteriormente eu chamei o colchetes de chaves, huehue.
+
+1 - Forma mais comum de criar um dicionário 
+		
+		dicio = {'rafa': 24, 'isa': 22}
+
+	Assim toda vez que solicitar para imprimir a chave rafa irá imprimir 24. E caso for isa, 22
+
+Forma nem tão comum	
+
+	variavel = dict(rafa= 01, isa= 02, joao= 'quem menos corre voa')
+
+	Repare que aqui temos algumas diferenças, ele é representado por pareteses, apenas o valor caso for str é com '' e a chave é 
+informada sem aspas.
+
+
+2	Acessando as informações do dicinário
+
+dicio = {'rafa': 24, 'isa': 22}
+
+	dicio['rafa']   #retorna 24
+	
+	print(dicio['rafa'])  #neste caso ele irá me retornar 24. A primeira forma para criar deve ser mais comum, pois é mais parecido com 
+				o print. obs: é feito da mesma forma para tupla e lista, apenas trocando a chave pelo indice numerico.
+
+	OBS: caso a chave que seja informada no print não exista será retornado erro, teremos Keyerro.
+
+	
+	Outra forma de acessar a informação do é utilizando o metido get(), o qual retorna None ou seja retorna um tipo sem tipo, ou um tipo,
+sem valor, assim não gerando o erro.
+	
+	dicio.get('rafa)  #retorna 24
+	
+	print(dicio.get('rafa'))   #irá printar a informação. ESTA É A FORMA MAIS RECOMENDADA
+
+
+Por retornar None caso não haja este valor na variável, acontece que evitamo erro. E podemos usar em um if else, ou qualquer outra estrutura
+que precise de um veraddeiro ou falto
+
+ teste	= dicio.get('rafa')  
+
+if teste:
+	comando
+else:
+	comando      # irá executar o comando if, pois é veradeiro. Também poderia fazer um if 'rafa' in teste como teste lógico que teri
+			o mesmo efeito
+
+
+Outro detalhe muito importante é que o get() aceita uma segunda especificanção, para quando não existir a chave procurar, retornar um valor
+padrão
+
+	teste	= dicio.get('cansi', 'Não exite chave')  
+	
+	print(teste)  # irá retonar 'Não exite chave'
+
+
+3 - teste de verdadeiro ou falso. Como já informado no item anterior, caso usemos 
+
+	'rafa' in teste   # temos um retorno True
+	print('rafa' in teste) # será impresso True
+
+
+4 - Adicionando e atualizando itens ao dicionário
+
+
+forma 1
+
+ teste['novo'] = 'receita'   # assim será criava uma chave no dicionário teste de nome novo com valor de receita.
+
+forma 2
+
+novo_dado = {'hue': 500}
+
+update.novo_dado    # resultado será a chave hue com valor 500 será adicionada, por meio da variável novo_dado e do metodo update
+
+
+Perceba que aqui eu informei como adicionar uma nova chave apenas, só que um dicionário não aceita duas chaves iguais. Assim o metodo para
+atualizar o valor de uma chave é o mesmo de adicionar.
+
+
+5 - Removendo chave.
+
+ Metodo Del dicio['chave]   #Assim irá detelar a chave selecionada, porem não é retornado o valor apagado e se chave não existir será gerado um Keyerro
+
+A forma mais comum é usado .pop()
+
+	dicio.pop('chave')   #Assim irá deletar a chave e retornar o valor deletado, por isso o metodo pop é o mais comum tanto em dicionários, quanto listas
+
+6 - Limpar o dicionário
+
+	dicio.clear()  - Assim ira apagar todas as informacoes do dicionario
+
+7 - Deepy copy e Shallow copie
+
+
+	Deepy copy faz uma copia independente
+
+	novo = dicio.copy()
+
+
+	Shallow copy faz uma copia espelhada e uma alteracao em um eh uma altercao em todos
+
+
+
+8 - Forma nao usual para criacao de dicionarios. Usamos o metodo fromjeys que cria a chave no primeiro valor e valora com o segundo valor. Um detalhe importante é que se colocar uma 
+palavra ele irá criar uma chave para cada letra com o mesmo valor.
+
+	{}.fromkeys('a', 'b')  uma chave apenas
+
+	{}.fromkeys('rafa', 'b') quatro variáveis valoradas com b
+
+	{}.fromkeys(['rafa', 'auha'] , 'b')  agora caso colocarmos colchetes ele irá criar uma chave para cada palavra entre aspas, seradas por virgula
+
+	{}.fromkeys(range(10), 'novo')  assim irá criar as chaves de zero a 10, com todos numerados com novo.
+
+
+9 - Interar sobre dicionário
+
+
+a - Imprimindo a chave
+
+	receita = {'jan': 100, 'fev': 300, 'mar':400}
+
+	for chave in receita:
+		print(chave)     #assim ele irá retornar as chaves do dicionário
+
+b - imprindo o valor
+
+	receita = {'jan': 100, 'fev': 300, 'mar':400}
+
+	for chave in receita:
+		print(receita[chave])     #assim ele irá retornar o valor de cada chave
+
+c - Imprimindo tanto valor quanto a chave
+
+	receita = {'jan': 100, 'fev': 300, 'mar':400}
+
+	for chave in receita:
+		print(f' Chave: {chave}, valor {receita[chave]} )     #assim ele irá retornar tanto a chave quanto o valor
+
+10 - Iterando sobre diciário, mas usando isto com funções que é a forma correta. 
+
+a - Imprimindo a chave e valor pela chave, utilizando a função key()
+
+	print(receita.key())
+
+	for chave in receita.key():
+		print(chave)  - imprime a chave
+		print(receita[chave]) - imprime o valor
+
+
+b - imprindo o valor, utilizando a função values()
+
+		print(receita.values())
+
+	for valor in receita.values():
+		print(valor)  - imprime o valor
+		
+
+
+c - Imprimindo tanto valor quanto a chave, utilizando a função items() e realizando o desempacotamento de dicionário
+
+	for chave, valor in receita.items():
+		print(f'chave {chave}, valor {valor})     #Usando esse for aninhado com um if, else. Podemos usar .values ou .key para procurar um valor especifico e assim
+								temos a outra resposta. Tava quebrando a cabeça por nada
+	
+
+11 - Valor maximo, minimo e soma - igual aos demais e apenas lembrando que funciona apenas se forem int ou float.
+
+	max(receita.values())
+	min(receita.values())
+	sum(receita.values())   # Preste atenção que aqui tivemos de usar .values() para trazer todas as informações numericas contidas no dicionário, pois somente assim é 
+					possível realizar as contagens. Pois ele não compara de forma automática as chaves.
+	
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+				
+
+	

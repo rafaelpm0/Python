@@ -1,0 +1,124 @@
+
+Antes dos tipos de variáveis, algumas noções gerais
+
+A - Temos inicialmente 
+
+soman +
+menos -
+divisão /
+multiplicação *
+divisão em int sem transformar em int //
+sobra de divisão %
+
+B - Temos os operadores igual a C, assim como temos também 
+
+variavel /= 
+variavel *=
+variavel -=
+variavel +=
+variavel ** algum numero inteiro - assim é potencia, uma observação de mtm básica que eu não lembrava. Um número na potencia de 0,5 é
+a raiz quadrada deste numero. burro kk
+
+# nestes casos estamos alterando o valor da variável por meio de uma soma ou multiplicação..
+
+
+C - PARA SABER UM TIPO DE UMA VARIAVEL, basta informar type(variavel)
+caso queira imprimir deve-se colocar um print ali. 
+
+D - Dupla atribuição - ocorre quando é informado duas variaveis em uma unica linha:
+
+valor1, valor33 = 22, 35
+Neste caso temos valor1 com 22 e valor 33 com 35
+
+
+E - Converter variaveis de um tipo para outra. Basicamente digitar o tipo da variavel e colocar em parenteses ela dentro.
+	int(variavel), float(variavel) tomar cuidado em floart pois ele perde tudo que está depois da virgula.
+
+
+1 - Sobre int
+
+POdemos fazer todas as operações enumeradas em cima, normalmente o IDE reconhece automático um int ou float. Oque tem de tomar cuidado é 
+que algumas operações retornam tipo diferentes. Duas variáveis não especificadas podem retornar float. exemplo
+
+4 /3   
+#retornar float a não ser que seja informado // por exemplo. Ele é um pouco mais dinamico
+
+Numero inteiros podem ser presentados com '_' exemplo. 100_00 ele irá reconhecer que é cem mil
+
+2 - Float.
+
+	Ele utiliza ponto para representar a virgula pois em ingles é assim. As demais operações já foram apresentadas e caso ele vire int, ele perde tudo depois 
+da virgula
+
+3 - bool - 
+	Exatamente como em c, tipo boleano é apenas verdadeiro ou falso. Maior uso dele é para operações lógicas ou para qualquer outra interação. Não vou entrar no end, or, if..
+pois irá ter aula específica disso. 
+	é importante resaltar que a maneira correta de escrever True e False é com a primeira letra maiuscula.
+
+4 - stg - string
+
+	A string são os textos ou letras. Mantem igual a C \n para pular uma linha Diferente de c onde aspas simples são char e asplas duplas são string. A princípio aqui é 
+tudo string e podem ser representadas de mais formas. 	As strings podem sem informadas atras de aspas simples '   ', aspas simples duplas ''   '', aspas simples triplas '''  _ '''.
+ O mesmo pode ser feito com aspas duplas ", as tres situações. Vale resaltar que se finaliza, com o mesmo tipo que é iniciado. Um exemplo de como pode ser util:
+
+	nome = "Ritas's car"  #util quando por algum motivo é necessário usar algum tipo de aspas na frase
+
+	
+	Algumas funções que podem ser usadas em string:
+
+	variavel.upper()   - todas as letras viram maiusculas
+	variavel.lower()   - todas as letras viram minuscuasl
+	variavel.split(' ')   - separa as palavras usando o espaço como demilitador. Assim é possível transformar cada palavras como um item de uma lista e possibilita imprimir cada
+um de seus item separadamente. Dentro os parenteses do split é preciso usar o delimitador, no caso ali ficou espaço
+
+		nome = 'rafael pinho medeiros'
+		print(nome.split()[2])  
+# assim ele irá imrprimir medeiros, ele funciona transformando cada palvras em um item. Porem ele não muda a string, é somente naquele momento,por isso caso você use 
+split() anteriormente, não surtir efeito.
+	
+ 
+	Além disto, também podemos imprimir somente parte de uma string, usando a estrutura nome(int:int). Ele irá imprimir contando do zero mais 1, é como se fosse a possição e um
+sinal de >:
+	
+	nome = 'rafael pinho medeiros' 
+	print(nome[0:3]) = 'raf'
+	print(nome[0:6]) = 'rafael'	
+	print(nome[2:6]) = 'fael'
+
+	Podemos inverter oque foi escrito usando dentro das chaves ::-1
+	
+		print(nome[::-1]) = 'leafar'	
+
+	É possível multiplicar uma stg exemplo nome* 3, vai simprimir rafael 3 vezes
+
+
+
+5 - None - SEMPRE INICADA COM LETRA MAIUSCULA
+
+	O tipo None como o nome sugera não retorna nada. Uma de suas caracteristicas é que esta variável vai sempre retornar o nada, sever para iniciar uma variável sem tipo denifido.
+Oque é bom caso não tenha ideia de qual dado estar variável irá aceitar. Outra caracteristica importante é que ela sempre será considerar como falsa.
+
+	num = None
+
+	if num:
+		comando
+	else:
+		comando       # irá executar o comando
+
+
+
+
+		
+	
+
+		
+
+
+
+
+ 
+
+
+
+
+

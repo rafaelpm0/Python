@@ -1,0 +1,109 @@
+Curso abordou meio basico, mas ok.
+
+Conjuntos funcionam da mesma forma que teoria de conjuntos em matemática. Em python os conjuntos são chamados de sets.
+
+Caracteristicas(sets): 
+1 - Não aceitam valores duplicados
+2 - Não ordenam valores
+3 - Não acessam valores via indice, ou seja, não são indexados.
+
+São bons quando é necessário armazenar valores quando não há valores repetidos e não há necessidade de se preocupar com chaves e valores.
+Um exemplo é, caso seja informado em uma lista n cidade e você deseja saber quais cidades foram, ao inves fazer um for para descobrir é mais facil transformar 
+em um conjunto e apos isso usar o len(conjunto).
+
+
+Os conjunção são referenciados por {} chaves, da mesma forma que dicionários. Porem com uma grande diferença de que não é informado a chave.
+Assim temos:
+
+
+conjunto = {1, 3, 55, 6}
+
+Outra grande caracteristica com conjunto é que ele aceita também qualquer tipo de variável.
+
+1 - Criando um set(conjunto):
+
+a - Forma menos comum:
+	
+	b = set({1, 3, 55, 66, 88}).
+
+b - Forma recomendada
+	
+	v = {1, 2, 44, 56, 3, 3}
+
+obs: Caso seja criado um set com valores repetidos, ele não irá acusar erro, apenas irá retirar ele do set. Vale resaltar que não existe ordem..
+
+2 - Podemos verificar se determinado elemento existe no set
+
+	if 3 in v:
+		print('hue')
+
+3 - Adicionando elementos em um conjunto:
+
+ 	v.add(3)  # Repare que aqui ele não esta adicionado por um indexador, e sim o numeral 3. Caso ele esteja adicionando um numero repetido ou uma string, nada irá ocorrer.
+
+
+
+4 - Deletar um elemento, existem duas formas de fazer, uma com revome e uma com discard. 
+
+	a -  v.remove(3)  # Assim irá remover o elemento com valoração 3. Ele não retorna o valor deletado, por isto o delete é o mais recomendado.
+				Caso ele não encontre o valor a ser removido ele acusa Keyerror.
+	
+	b - discard.v(4)   # Assim ele irá remover o elemento com valoração 4. É o mais utilizado pois não acusa erro ao remover um item inexistente, e como o remove, tambem
+				não retorna o valor deletado.
+
+5 - Conceito de shallow copy e deep copy funcionam da mesma forma
+
+	Shallow copy      v = a		#Valor dependente, se alterar um altera o outros
+	Deep copy         v = a.copy    # Valor independente, se alterar uma não altera o outro.
+
+6 - Remover todos os itens com clear(), igual para todos os conjuntos
+
+
+	v.clear() # irá zerar a variável.
+
+7 - Metodos matemáticos, usando set como em teoria de conjuntos.
+
+	A - variavel a .union(variavel b)
+
+	Imagine que a e b sejam um set/conjunto.
+
+	c = a.union(b)   # Assim teremos um set c que possui a união de a e b, junta e retira os repetidos
+	c = a | b        # Teremos o mesmo resultado da primeira forma, porem utilizando pipe que é representação simbolica
+
+obs: Não é possível somar um conjunto, somente por meio de metodos
+
+    
+       B - .intersection()
+	
+	c = a.intersection(b)   #Assim terremos um set que possui a interseção de a e b, ou seja apenas oque tem em comum
+	c = a & b               #Teremos o mesmo resultado da primeira forma, porem utilizando o e comercial que é a representação simbolica
+
+       C - .diferrence()   # Retorna a diferença.
+
+Sempre lembrar do dir... pode ser util 
+
+
+8 - Soma, maximo, minimo e len, igual ao demais conjuntos. Além disso todos devem ser numericos, com exceção deo len
+
+sum(a)
+max(a)
+min(a)
+len(a)
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+

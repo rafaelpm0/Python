@@ -1,0 +1,65 @@
+Quando estivermos falando de checagem de tipos em python, estamos fazendo uma abordagem para tipar as funções, parametros e variáveis.
+Assim temos um código com uma tipagem estática e não dinámica.
+
+1 - Typing Hint, que pode ser traduzido ao pé da letra como dica de tipo. Assim temos como fazer o python dar uma dica de qual tipo de dado que determina função precisa assumir. POREM ELE NÂO IRA GERAR ERROR NA EXECUCAO, somente se abrimos com mypy.
+
+def comprimentar(palavra: str) -> str:
+    return palavra
+
+
+Ao realizar criar um Type hint, algumas regras devem ser seguidas. Nas variáveis você tirá colocar dois pontos e o tipo, str, bool, list, dict, tuple, int e caso seja um parametro com informação default, após o tipo ser informado continua normalmente com = valor.
+Após fechar os parenteses da função você deve informar -> tipo:     para que assim podemos definir o tipo de retorno da função.
+Tudo usa apenas um espaço com exceção do dois ponto que é colado na variável e os dois pontos que marca a função.
+
+
+
+x = comprimentar(33)
+
+print(x)
+
+
+2 - Mypy, usando a biblioteca mypy, podemos fazer a checagem do tipo de dados no qual estamos trabalhando. Para executado, abrimos o arquivo usando mypy direto do terminal.
+
+Para isso no terminal faça, mypy arquivo.py  
+Se o terminar estiver na pasta do projeto apenas faça conforme acima, se não estiver é preciso o caminho todo
+
+
+3 - Annotations, é uma forma de usar o __dict__ em uma função, pois dict funciona somente em objetos, assim ele retorna seus parametros e retorno em um dicionário.
+
+Usando a função acima como exemplo temos:
+
+
+y = comprimentar.__annotations__  
+
+print(y) onde o retorno será igual a {'palavra': <class 'str'>, 'return': <class 'str'>}
+
+
+Caso seja feito um __anotations__ diretamente no comando, ele irá listas em dicionário todas as variáveis soltas, desde que elas estejam com o type hint.
+
+b: str = 'TESTE'    
+
+print(__annotations__)
+
+
+Da mesma forma que __annotations só retorna funções, dict só retorna em objetos. além disso annotations só funciona em funções (pode ser uma função de um objeto) que estão com hint nelas
+
+
+4 - Type Hint em comentários. Existem outras formas de fazer o type hint. 
+
+Em comentários
+
+def multiplicar(num1, num2):
+    # type: (int, int) -> int    # digite # type: (tipos) -> tipo   sendo as variáveis eo retorno
+    return num1 * num2
+
+FORMA BIZARRA - usando um comentário a cada variável. Aqui você irá usar uma virgula a casa variável, digitar # type: tipo e após fechar os parametros com parenteses, digitar # type: (...) -> tipo
+
+
+def multiplicar(
+	num1, # type: int
+	num2, # type: int	 
+): # type: (...) -> int
+
+
+
+obs: Ao criar um objeto,´é possível usar ele como um type hint.

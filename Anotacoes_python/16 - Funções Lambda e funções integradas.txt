@@ -1,0 +1,441 @@
+Nesta seção será apresentado a expressão anonima lambda e como utiliza-la de forma integrada a funções.
+
+
+A - Definição de lambda: pelo que eu entendi são funções de declarações mais simples e normalmente são aplicadas como subfunções ou parametros de funções. 
+
+A - Definição
+
+A expressão lambda é definida pela expressão '   lambda variavel: comando   '  sendo que podemos ter varias entradas, é possíve colocar um if else dentro tambem 
+
+def teste(x):
+    return x + x*2
+
+
+teste2 = lambda x: x + x*2    # Perceque que a declaraca da lambda precisa ser informada em um variável ou parametros
+                              # Ela está mais para uma declaração do que para função, uma função autodeclarada
+
+
+print(teste(4))
+print(teste2(4))  # Ambos os resultados iram dar 12, mas usando lambda pode criar uma função de uma variável
+
+
+Até o momento parecem coisas iguais, porem a diferença irá se tornar clara nos proximos exemplos.
+
+a.1 - Multiplas entradas
+
+nome_completo = lambda nome, sobrenome: nome.strip().title() + " " + sobrenome.strip().title()
+
+print(nome_completo('RAFAEL', 'medeiros'))  #Neste exemplo temos um lambda que irá aplicar title e strip (retira os aspaços entre as beiradas caso tenha)
+
+
+obs: Ao passar mais argumentos do que é proposto teremos um typeError
+
+
+B - Usando lambda como parametro de busca pela funçã sort
+
+
+nomes = ['Rafael Pinho medeiros', 'tiago valdir', 'JOAO VITOR ROGRIGUES', 'ISADORA schmidt de SouzA']
+
+# A função sort possui um parametro chamado key, onde ele ira iterar em cada item antes de ordenar, ou seja,
+# podemos usar o este paretro e aplicar um lambda nele antes de organizar, assim poderemos criar uma condição dentro
+# da busca ao invez de orndenar somente pela primeira letras
+
+nomes.sort(key=lambda nome: nome.split(' ')[-1].lower())  # Vale a pena resaltar que a função sort retorna none já que ela muda a variável em si, diferente de sorted que retorna e não muda
+nomes = [x.title() for x in nomes]   
+print(nomes)
+
+
+C - Usando lambda como uma subfunção. Caso dentro de uma função usemos um return com uma lambda, podemos colocar a função declara dentro de uma variável com os parametros pré definidos
+	e usar nome da variável que ela foi armazenada para executar o lambda conforme abaixo. Assim evitamos criar duas funções e o programa fica mais rápido
+
+def funcao_2(a, b):
+    return lambda c: (a+b) * c
+
+
+teste = funcao_2(a=10, b=5)
+
+print(teste(2))
+print(teste(3))
+
+
+d e, e - FUNCOES MAP E FILTER retonar map e filter object, é preciso transformalos em list, set ou tupla para pode utilizar
+
+
+d - Usando map com lambda. A função map() recebe dois parametros sendo uma função 'sem parenteses' e um iteravel, onde ele fazer o serviço do loop for para retonar o resultado da funcao de
+    cada item do iteravel com a função informada, como se fosse um f(x) e x é cada item da sua lista.
+    OBS: ao usar map ele retornar um objto do tipo map
+
+import math
+
+
+def raio(r):
+    return math.pi * (r ** 2)
+
+
+lista = [x for x in range(1, 11)]
+
+areas = map(raio, lista)   # Ao invez de iterar com loop for sobre todos os elementos da lista, podemos usar o map
+print(list(areas))          # Mas preste atenção que deve ser sem o () para ele poder iterar sobre quaisquer item   IMPORTANTE PACASSSS!!!!
+print(type(areas))
+print(areas)
+
+
+Agora explicamos a utilização do map, bora usar ele com lambda
+
+import math
+
+
+def raio(r):
+    return math.pi * (r ** 2)
+
+
+lista = [x for x in range(1, 11)]
+
+areas = map(lambda x: math.pi * (x ** 2), lista)
+print(list(areas))  #conversão
+print(list(areas))  #calculo zerado, vira uma lista em brando, a conversão so ocorre quando é de tipo e não um print ou type   
+
+# um detalhe importante do uso do map, apartir do momento que você converte o valor que ele foi armazenado o calculo,
+# é apagado, ele pode ser convertido uma vez só, oque se faz util para que economizar memoria ou usar em loop sem ter de
+# zerar a função
+
+
+
+e - Função filter. A função filter tem o objetivo de realizar um filtro utilizando um critério logico e um iterável, assim criando uma nova coleção do iteravel original.
+    Essa função possui algumas caracteristicas bem semelhantes ao map, primeiro ela recebe 2 entrada, uma função ou lambda que irá receber o valor de cada iteralvel e um 
+    iteravel. A maior diferença é que a função do map modifica o valor, enquanto filtro serve para filtar a partir de um teste lógico e se esse teste lógico for verdadeiro
+    irá manter, caso contrario não.
+    Uma caracteristica bem importante do filter, assim como do map, assim que os valores que o filter gera, que é um filter object, o resultado do filter é apagado para não
+    carregar memoria, assim temos uma forma de usar em loops sem ter de zerar, economizando código.
+
+   DETALHE DE FILTER E MAP, o primeiro parametro que se refere a função ou uma lambda não somente aceita tipo função, pois ele não valora variável, ele apenas insere em cada 
+   instancia o valor de cada iterável, então se informar apenas um x, ele não irá retonar nada. 
+
+1 - Exemplo basico
+
+   lista = [x for x in range(1, 11)]
+
+filtro = filter(lambda x: x > 4, lista)   # declaração  - É interessante saber que o lambda aceita variável declaradas anteriormente, então é possível colocar qualquer valor de comparação
+print(filtro)                             # print
+print(list(filtro))                       # altera e usa a unica instancia do filter
+print(list(filtro))                       # retona uma lista vazia, sendo que sua instancia já foi apagada
+
+
+2 - Retirando espaços em branco
+
+
+nomes = ['Rafael', '', 'Luciana', 'Isadora', '', '']   
+limpo = filter(lambda x: len(x) > 0, nomes)
+limp = filter(lambda x: x != ', nomes)
+limpi = filter(None, nomes)
+
+print(list(limpo))
+print(list(limp))
+print(list(limpi))
+
+
+Repraque aqui podemos fazer de duas formas, com um teste lógico em um lambda e com um teste lógico usando None ou seja vaziu, tudo que é vaziu é igual a None.
+
+
+3 - Aqui temos um exemplo mais complexo:
+
+ex1 = {x: x * x for x in range(10)}
+
+print(ex1)
+
+par = list(filter(lambda x: x % 2 == 0, ex1))
+divide = list(map(lambda x: x ** 0.5, par))
+teste = list(map(lambda x: x ** 0.5, list(filter(lambda x: x % 2 == 0, ex1))))
+print(par)
+print(divide)
+print(teste)
+
+
+4 - Exemplo bizarro. Aqui eu crei uma lista de dicionários usando uma dict e list comprehension. Depois peguei da lista filtrada pelo filter, 
+somente o dicionário que a chave 2 é igual 2 e depois  eu peguei a chave 1 por meio meio do map e somei 50
+
+
+ex2 = [{x: x * y+1 for x in range(2)} for y in range(3)]
+
+print(ex2)
+print(list(filter(lambda x: x[1] == 2, ex2)))
+
+print(list(map(lambda x: x[1] + 50, list(filter(lambda x: x[1] == 2, ex2)))))  # Ficou meio bizarro, mas é um exemplo de como filtrar a lista, depois alterar o resultado para
+                                                                                  o desejado usando um map. O m
+
+4.1 Um exemplo de filtro e map mais concreto. Aqui retiramos com filter os campos que estão zerado e concatenamos em uma string cada item da lista em uma nova lista de string com 
+	um texto definido na lambda do map
+
+nomes = ['Rafael', '', 'Luciana', 'Isadora', '', '']
+
+instrutores = list(map(lambda x: f'Seu instrutur(ra) é {x}', filter(None, nomes)))
+print(instrutores)
+
+
+f - Função reduce() da biblioteca functools . Basicamente o reduce recebe dois parametros, sendo uma função e um iterável. Sendo que a função também deverá receber dois parametros. Oque essa
+função faz é reproduzir um loop for ou while que itera sobre toda a lista ou todo iterável informado e realizar algumas coisa com x1 e x2, depois ele pegar r12 e x3. Sendo x_ a posição
+do iterálvel e r o retorno da aplicação anterior da função.
+
+Esta função é mais para conhecimento, pois é mais facíl e legível aplicar um loop for, por isso ela esta em uma bibliteca e direto.
+
+
+from functools import reduce
+
+lista = [x for x in range(10)]
+
+teste = reduce(lambda x, y: x + y, lista)   # Perceque que o lambda é usado em toda função que itera sobre algo
+print(teste)                                  # Tipo map, filter, reduce aqui
+
+
+# Seria mais facil fazer
+
+
+def somas(x):   # É muito mais visível para o programador isso. 
+    soma = 0
+    for i in range(len(x)):
+        soma += i
+    return soma
+
+print(somas(lista))
+
+
+
+g - all() e any() - Como o nome sugere, ambas as funções são testes logicos, sendo all caso todo sejam verdadeiros e any caso algum seja verdadeiro. Porem oque é poderoso nestas
+    ferramentas não é o teste lógico e sim oque pode ser colocado dentro dele. Usando um lambda, um if else, map ou filter, conseguimos definir condições de forma muito flexível
+    para cada uma destas funções.
+
+
+Caraqueteristicas nos numero. 1 é True, 0 é False. Qualquer outro numero retorna True
+Coleções vazias são falsas, coleções com valores são verdadeirias.
+String são sempre verdadeiras, a não ser que esteja em algum teste lógico.
+
+
+lista = [x for x in range(10)]
+lista2 = [x for x in range(1, 10)]
+lista3 = ['Carla', 'Carlos', 'Kamila', 'Caroline']
+
+print(all(lista))
+print(all(lista2))
+print(all(lista3))
+print(all([x[0] == 'C' for x in lista3]))
+print(all([x[1] == 'a' for x in lista3]))
+
+# Aqui esta a força do all e any, podemos usar um comprehesion para iterarar e aplicar um teste lógico em cada item,
+# assim temos uma nova lista que não é amazenada composta de true ou false e usamos o all ou any para valida-la.
+
+print(all([True if x in 'aeiou' else False for x in 'aif']))
+
+"""
+Perceba que aqui eu iretei usando um regra lógica dentro do comprehension list, se x que irá assumir os 3 valores 'iaf'
+estiver na condição que é if x in aeiou ele retorna True, do contrário False. Oque eu percebi aqui é que o teste logico
+if else dentro de uma declaração de forma simplificada acontece sendo o resultado if condição else resultado falso.
+
+"""
+
+print(all(num for num in lista2 if num % 2 == 0))
+
+"""
+No exemplo acima o professor errou, a condição que ele quer usando comprehension não é na lista e sim na variável que 
+irá compor a lista. Assim a regra lógica tem de estar no começo que irá para lista iterada (aonde esta o x, para que o x
+seja veradadeiro ou falso) e caso você deseja filtar usando comprehension você deve colocar no final, pois ele irá adi
+cionar na lista apenas caso a condição seja atendida, eu poderia colocar um else e passar outro comprehension também 
+
+
+
+
+
+h - Generators  - Esto aqui é muito interessante, mas muito mesmo. Um generator são do tipo generator object e podem ser descritos como uma lista, dicionário ou set em código de 
+                  mais baixo nível, assim ocupando menos memória. Assim quando você precisar de algum tipo de coleção que não irá printar é melhor usar um generator para economiar
+                  memoria. A diferença na criação de um generator para uma lista, dic ou set é os delimitadores, lista [], dict {:}, set{}, tupla() e genarator().
+                  Perceba a diferença entre tupla e generator, ela é nenhuma. O python só irá diferenciar se você usar comprehension dentro de de paresenteses, assim criando um
+                  generator com caracteristicas de uma lista. É possível iterar em um generator, e se printar cada item ele printa
+                  
+exemplo = (x for x in range(20))
+exemplo = (x: x*2 for x in range(50))
+exemplo = (x: y for x, y in lista1, lista2)
+
+
+
+I - Sorted() - A função sorted() serve para ordenar qualquer conjunto e ele retornar isso em um novo conjunto, tome cuidado para não confundir com sort() que modifica a propria lista
+               da qual ele foi aplicado, além de retonar None. O retorno da função sorted é a propria lista organizada, também podemos aplicar um generator no sorted...
+
+sort só funciona em listas, enquanto sorted em qualquer coleções de dados
+		
+Sobre sorted() é interessante saber que ele organiza seguindo quesitos numeros e caracteres pelo que entendi e uma das coisas mais interessantes como já informado é o
+parametro key= que aceita uma função que irá iterar sobre todos os elementos para organizar, como se criasse uma lista fantasma apenas para organizar onde cada iterável
+ do conjunto apresentado irá passar pelo parametro key= . Podem ser passadas funções como len, int, str como parametros dentro de um lambda,
+ isso ainda não me cai naturalmente. Com lambda podemos,
+acessar dicionários.
+
+Pelo que entendi, sempre usar lambda nos key. Posso ate testar não usar. 
+
+
+Outro parametro legal do sorted é o reverse=True, ele irá inverter e organizar do maior para o menor ao invez de do menor para o maior. Por default ele irá ter esse parametro
+como False
+
+
+UM DETALHE MUITO IMPORTANTE, quando usamos o sorted, ele retorna uma lista organizada certo. então teriamos como resultado 
+
+lista    nesse caso podemos acessar alguma informação dessa lista, lista('chave') ou lista[3].
+
+
+lista = [55, 10, 40, 400, 54]
+lista2 = {'a': 'Carla', 'b': 'Carlos', 'c': 'Kamila', 'd': 'Caroline'}
+lista3 = ['Carla', 'Carlos', 'Kamila', 'Caroline']
+lista4 = [{0: 'Carla', 1: 'Carlos'}, {0: 'Kamila', 1: 'Beatriz'}]
+
+
+print(sorted(lista))
+print(sorted(lista3))
+print(sorted(lista2))  # Por padrão dicionário primeiro ajustam pela chave
+print(sorted(lista2, reverse=True))
+print((sorted(lista4, key=lambda x: x[1])))  # Aqui eu acessei a segunda chave de cada dicionário que estaõ em uma lista
+
+
+Os parametros key e reverse podem ser usados juntos
+
+
+
+EXEMPLO DE SORTED FEITO MANUALMENTE
+
+
+""""
+Abaixo temos um exemplo de como fazer um função sorted manualmente, repare que a função sorted organizar a lista ou
+o as string conforme sua valoração, assim temos de percorrer cada item do iterávevl por todos os itens do iterável. Além disso
+em python não é preciso usar uma variável temporaria, pois o python possibilita a atribuição multipla.
+
+
+"""
+
+teste = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+teste2 = [-3, 40, -44, 59, 4]
+
+
+def sortid(lista):
+    n = len(lista)
+    for objeto in range(n):
+        for compara in range(n):
+            if lista[objeto] < lista[compara]:
+                lista[objeto], lista[compara] = lista[compara], lista[objeto]   # Atribuição multipla
+
+    return lista
+
+
+"""
+Esse exemplo dado pelo professor é mais interessante, há economia de memória, perceba que na primeira instancia 
+da função sortids ele irá comprarar os itens da lista de indice 0 a (1 a len(lista), depois 1 a (2 a len(lista))
+Acredito que isso seja um exemplo de arranjo, retirando oque já foi repetido. Mais avançado que meu exemplo
+
+"""
+
+
+def sortids(lista):
+    n = len(lista)
+    for objeto in range(0, n):    # Repete pelo tamanho da lista
+        menor_ind = objeto        # Itera cada item da lista sem repetilos
+        for compara in range(objeto+1, n):         # Economia de memoria na estrutura objeto+1
+            if lista[compara] < lista[objeto]:
+                menor_ind = compara      # Leva para menor indice o proximo item a ser observado
+                lista[objeto], lista[compara] = lista[compara], lista[objeto]   # Atribuição multipla
+
+    return lista
+
+
+print(sortid(teste2))
+print(sortids(teste2))
+
+
+J - Funções min e max. As funções min e maximo como já usadas anteriormente servem para retornar o menor e o maior valor. Oque temos de mais poderoso nessas ferramentas é o 
+    parametro key=, que como informado anteriormente ele aiceta uma função para iterar sobre os objetos e assim começar a organizar, assim podemos fazer ele acessar uma coleçao
+    de listas, tuplas dentro de tuplas, um dicionário, sendo que normalmente não seria possível sem este parametros. Assim não precisamos criar uma lista temporaria apenas para
+    organizar.
+
+   Vale ressaltar que se usarmos o max ou min em um dicionário ele irá acessar o valor da chave. Caso precise do valor precisa informar .values.
+
+   Ele funciona tanto em numeros quanto em letras, as lebras ele irá organizar pela ordem alfabetica e não pelo tamanho.
+   Caso queira pelo tamanho do nome irá precisar 
+  
+   O interessante de um max ou min em um dicionário é que quando você usando um lambda, ele não retorna o valor que você acessou e sim o dicionário, entõa é possível acessar
+   outra chave do mesmo dicionário. Imagine isso em uma lista de dicionário onde você quer a menor chave 1, basta fazer min(lambda x: x['chave1']) e para acessar a chave 2, 
+   da menor chave um basta adicionar a chave desejada no final ex: min(lambda x: x['chave1'])['chave2']
+
+K - reversed(), não confundir com reverse que funciona somente com listas. Sua função é inverter o iterável. 
+  
+ Ela funciona basciamente com listas, tuplas, set não há ordem dos elementos, assim como dicionários e strings. Vale a pena lembrar que slice de string vale mais a pena
+
+string[::-1]
+
+
+l - Funções len, abs, sum e round
+
+ len - retornar o tamanho, em dict ele retona a quantidade de chaves no dicionário
+
+ sum - soma - pode ser listas e um int, ele irá somar sum([lista], int)
+
+ round - arredonda para cima quando for maior que 0.5, por padrão ele zera as casa decimais e caso informado o segundo parametro você determinas o numero de casas
+
+ abs - retorna o numero absoluto que é apenas os algarismos, sem considerar sinal
+
+M - A função zip(), ela recebe dois ou mais iteráveis e irá montar uma coleção zip object caso você não transforme em lista ou dict ou afim. Ela irá pegar o primeiro item de cada
+coleção e montar uma coleção zip com os elementos, pode ser convertido para dict. Importante anotar que todo objeto que é gerado do seu tipo, como genator se eu armezenar o zip 
+ou apenas geralo, após sua primeira transformação ele será apagado da memória. armezene o zip em v1, converta em v2 para list, v1 vai estar vazio
+
+A quandidade de elementos será a do menor iterável. 
+
+lista1 = [1, 2, 3]
+lista2 = [3, 4, 5]
+
+print(list(zip(lista1, lista2)))
+print(dict(zip(lista1, lista2)))  # caso usar em dict ele entende que a primeira variavel é a chave e as demias valores
+
+
+
+
+
+
+import random
+
+
+def sortids(lista):
+    soma = 0
+    for iteravel in range(len(lista) - 1):  # irei resetar essa função
+        for compara in range(iteravel+1, len(lista)):
+            if lista[compara] < lista[iteravel]:
+                lista[compara], lista[iteravel] = lista[iteravel], lista[compara]
+        soma +=1
+        print(soma)
+    return lista
+
+# ideia coloca rum loop for a cada if e mudar o iterável de começo e startando ele em zero. Ver se melhora o tempo de r
+lista = random.sample(range(1_000_000), 1_000_000)
+print(sortids(lista))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

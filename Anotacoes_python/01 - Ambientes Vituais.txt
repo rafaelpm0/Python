@@ -1,0 +1,8 @@
+cmdO python funciona criando ambientes virutais para melhor aplicação de recursos sem que haja conflito.
+Após a devida instalação para criação manual de um espaço virtual você pode usar os comandos no cmd:
+
+mkvirtualenv nome_do_ambiente   //env foi uma definição que ainda não entendi muito bem, mas ok.
+mkvirtualenv nome_do_ambiente -p python$$$    onde $$$ deve substituir pela versão como 3.9 para criar ambiente com outra versão desde
+que instalada
+
+rmvirtualenv nome_do_ambiente // para remover o ambiente virtual

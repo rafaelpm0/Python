@@ -1,0 +1,58 @@
+A - A primeira entrada de dados a ser aprendida é a função input().
+Diferente de c onde era necessário criar uma variável e depois levar conteudo nela, o python é mais flexivel na criação de variaveis.
+Assim se somente declaramos
+
+1 - carro = input()    # o usuário poderá digitar sua entrada de dados
+2 - carrp = input('Digite a marca do carro') #neste ira printar a frase e dar a opção para o usuário digitar
+3 - carro = carro2 = input() assim é possível startar as duas variáveis com o mesmo valor inicial
+
+ O input sempre irá guardar informações como strig. Para mudar-mos isso podemos fazer
+
+3 - carro = int(input("Quanto vale o carro"))   # a informação será gravada em int, isso é um processo chamado cast, onde a variável
+é tratada.
+
+
+B - A primeira saída de dados a ser aprendida é o print()  Ele tem basicamente a mesma estrutura em C, porem sofreu atualizações um tanto
+interessantes 
+
+1 - print('o carro é azul') # assim temos igual em C
+2 - print(' a marca do carro é %s', carro)  # tambem muito similar do que é feito em C
+3 - print(' a marca do carro é %s e sua cor é %s', % (carro, cor)) #também é similar do que ocorre em C
+ 
+
+A partir de agora começa a ficar interessante em python, pois temos a função .format()
+basicamente ela permite eu possa numerar minhas variaveis em uma string, assim é mais facil contruir uma frase 
+
+4 - print('a marca do carro é {0}'.format(carro)
+5 - print('a marca do carro é {0} e tem a cor{1}'.format(carro, cor)
+
+E mesmo depois disso, ainda foi simplificado mais ainda. 
+
+6 - print(f'a marca do carro é {carro})
+7 - print(f' a marca do carrro é {carro} e sua cor é {cor}')     # em ambos os casos o f é de format
+
+
+Além disso, dentro do colchetes que usamos no .format() é possível fazer calculos.
+
+7 - print(f' a marca do carrro é {carro - 10} e sua cor é {cor}')  #fiz um exemplo aleatorio, caso o carro não estiver em int, irá 
+acusar erro, por isso é necessário realizar o cast
+
+
+8 - Caso usado variavel_1 = input().split(), ele irá transformar cada item da lista como um item da lista. É bom notar, que ele transoforma,
+em um array ou se informar mais de uma variavel ele armaçeza em mais de uma variavel
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

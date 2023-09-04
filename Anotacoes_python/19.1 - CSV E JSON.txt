@@ -1,0 +1,132 @@
+Nesta unidade será tratado como manipular arquivos do tipos CSV comma separated values (arquivo separados por ,) e arquivos do tipo json que sao utilizados como meio termo nas aplicações
+de api e java acredito eu 
+
+
+um lugar legal para pegar dos do governo em csv e json é www.dados.gov.br/dataset
+
+
+1 CSV - Os arquivos separados por vigula, tratamos a mesmaforma que txt e sua estrutura é a basicamente a mesma. 
+
+with open('file.txt', 'r', encoding='utf-8) as arquivo:
+	texto = arquivo.read()
+	print(texto)  # ira imprimir o texto como um str
+
+
+Em cima foi um exemplo de como abrir qualquer arquivo em txt em python, mas para tratarmos de CSV, existem duas possibilidades 
+
+a - reader - Permite que interemos as linhas do arquivo txt como linhas #não muda muito da forma que estamos acostumados com o readlines(), porem cada linha irá ser uma lista e cada item da lista será formado pelos itens divididos por virgula
+
+b - DictReader - Permite que interemos sobre as linhas do arquivo CSV como um OrderedDickt # irá criar um dicionário conforme o cabelhaço que informa oque é cada coluna 
+
+
+a- Para usar o reader precisamos importalo 
+
+from csv import reader
+
+
+with open('file.csv') as arq:
+    leitor = reader(arq)
+    for i in leitor:
+        print(i)   # cada linha será uma lista dos itens separados por virgula
+
+#aqui é bom fazer um lembrete que quando temos um objeto iterável, caso usemos em algum momento next(iterável) ele irá pular uma instancia desse objeto
+
+
+b - Usando DictReader, ele irá ler o arquivo usando a primeira linha como parametro para criação das chaves do diciárinario e no dicionário, cada chave irá conter uma lista tendo a informação de cada campo.
+
+from csv import DictReader
+
+
+with open('file.csv') as arq:
+    leitor = DictReader(arq)   #olhar documentação e ele usa a primeira linha para usar como chaves dos dicionário
+    for i in leitor:
+        print(i) #imprimi o dicionário
+        print(i['chave'])  #acessando a chave do dicionário
+
+
+a.1 - escrevendo com writer - ester seria o complemente de reader, ou seja, como escrever, com writerow()
+
+from csv import writer
+
+
+with open('file.csv') as arq:
+    leitor = writer(arq)   #olhar documentação e ele usa a primeira linha para usar como chaves dos dicionário
+    for i in leitor:
+        item_1 = 1
+        item_2 = 2
+        item_3 = 3
+        leitor.writerow([item_1, item_2, item_3])  # cada pasada de writerow escreve uma linha, ja pulando para proxima
+                                                   # porem ele aceita somente uma variável 
+
+
+obs: REPARE QUE TODOS OS ARQUIVOS USAM open(), ENTÃO AS MESMAS REGRAS DE SE APLICAM DAS QUE VIMOS ANTERIORMENTE EM LEITURA DE ARQUIVOS TXT
+
+b.1 - writerow() quando o objeto é do tipo DictWriter 
+
+from csv import DictWriter
+
+with open('file.csv', 'w') as arq:
+    cabecalho = ['nome', 'idade', 'sobrenome']  # aqui iremos definir as chaves do dicionario na leitura que é a 1º linha
+    leitor = DictWriter(arq, fieldnames=cabecalho)
+    leitor.writeheader()
+    item_1 = 'rafael'
+    item_2 = '24'
+    item_3 = 'mederiso'
+    leitor.writerow({'nome': item_1, 'idade': item_2, 'sobrenome': item_3})
+    # aqui você irá usar writerow e o parametro vai ser um dicionário com a chave do cabeçalho e o item a ser adidionado
+    # pode-se usar também um loop para escrever várias linhas
+
+
+
+2 - Pickle  - O objeto do pickle é trabalhar com a binarização e desbinarização. Esse módulo não é seguro para trabalhar com arquivos vindo de fontes desconhecidas.
+
+a - Escrita
+
+import pickle
+
+with open('file', 'wb') as arc:     #wb é write binary
+   pickle.dumps(variável, arc)     # poram gostaria de lembrar que o dump recebe apenas um argumento que será escrito, assim não é possível passar varias variáveis.
+
+o dump() da biblioteca pickle irá escrever o arquivo txt em binário  
+
+
+o interenssante agora que aprendemos orientação há objeto é que é possível informar o objeto.
+
+b - Leitura
+
+
+with open('file', 'rb') as arc:
+	teste = pickle.load(arc)    #Aqui temos o carregamento do arquivo para python, podemos carregar as variáveis como objetos, amei isso.
+
+3 - Trabalhando com Json e Pickle.  Arquivos Json são arquivo escritos em JavaScript Object Notation, basicamente um arquvio escrito em java que acaba sendo muito comum em tratativos de API, integração de módulos e por ai vai. Para trabalhar com Json é preciso importar a biblioteca
+
+Import 
+
+
+Pelo que eu entendi o json funciona com os mesmos metodos json.dumps(variavel, arquivo) e json.load(arquivo)
+
+3 - jsonpickle -  é uma biblioteca a parte que precisa ser baixada. Que possui basicamente as mesma funções do que as apresentadas acima. Mas possui a função .encode para transformar
+em json, pelo que eu entendi foi isso. posso estar errado. 
+
+
+escrevendo 
+with open('texte.txt', 'w') as arc:
+    x = jsonpickle.encode('teste')  # irá transformar no padrão de leitura json
+    arc.write(x)
+
+
+decodificando
+with open('texte.txt', 'r') as arc:
+    x = arc.read()     #lendo o arquivo como sempre fazemos
+    x = jsonpickle.decode(x)   #traduzindo para pyhton
+    print(x)   
+
+
+
+
+        
+
+
+
+
+

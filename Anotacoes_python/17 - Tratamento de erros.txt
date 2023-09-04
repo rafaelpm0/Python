@@ -1,0 +1,233 @@
+Antes de tratar um erro, devemos entender oque aquele erro siginifca e oque pode influienciar em nosso código.
+
+
+Primeiro será apresentado esse cada tipo de erro siginifica, depois as diversas formas de tratálo.
+
+1 - Erros mais comuns:
+
+ a - SyntaxError - Como o nome sugere, ocorreu um erro na sintaxe, ou seja, na escrita. Ocorre quando python não consegue ler oque foi escrito.
+   
+     def funcao:      #Aqui ocorrera SyntaxError, uma função sempre será definida pelo nome e um pareteses, como a estrutura é invalida, ocorre erro de Syntax
+          print...
+
+ b - NameError - Ocorrerá quando a variável chamada não estiver declarada.
+
+      print(teste)   # Será a variável texte não tiver sido iniciada, ocorrerá NameError
+
+    a = 10
+
+    if a < 10:
+       msg = 'hello'
+    
+    print(msg) # Aqui poderá ocorrer um NameError, pois caso a condição imposta não seja aderida a variável msg nunca terá sido criada. Para a variável ser criada o bloco de código
+               # na qual ela está inserida 
+
+
+c - TypeError - Ocorre quando o tipo variável aplicado não é compatível com a função/operação/ação aplicada. Você não pode por exemplo informar uma ela em um int
+
+    print(len(5)) # Ele aceita o caracter, mas não como int, só como str
+
+    print('texto' + []) Não há como somar uma string com uma variável. Então perceba que o Type error ocorre quando temos algo ocorrendo onde uma das variável não possui 
+                        o tipo adequado para ela. 
+
+d - IndexErro - Ocorre quando tentamos acessar um indice inexistente. Uma lista de tamanho 3 e você tenta acessar o indice 3. Normalmente acusa idice fora de alcance
+
+e - ValueError - Ocorre quando uma função recebe/operação build-in recebe um argumento com tipo correto mas com valor inapropriado. Basicamente 
+
+    print(int('Geek')) A função print recebeu o parametro correto, mas a geek não. Sinceramente não ficou muito claro para mim.
+
+g - KeyError - Ocorre quando tentamos acessar um dicionário com uma chave inexistente. Acho que o get contorna esse erro.
+
+
+h - AttributeError - Ocorre quando em uma variável não possui uma função/atributo.
+
+    tupla = (1, 3, 5)
+    tupla.sort()   # Ocorre AttributeErro, a função sorte só existe para listas. 
+
+
+2 - Raise - O raise é uma forma de tratar um erro, quando um raise é definido caso ocorra um erro generico ou um erro defido ele irá retornar uma ação pré defida e o erro irá 
+            acontecer, porem uma mensagem específica é retornada. O raise é uma palavra reservada python assim como qualquer outra, similar com o return e encerra a função, a diferença é             que ela é apenas acionada quando ocorre um erro e retorna a mensagem pre estabelecida. 
+            Fico com a impressão de que o raise é para criar um erro quando ele não irá acontecer necessariamente, pois é possível induzir um erro e encerrar o programa..
+
+   Estrutura: 
+
+             raise TipoError('TEXTO')
+
+             lista = ['cabra', 'vaca']
+             
+             def gado(animal):
+                 if 'burro' not in animal:
+                     raise ValueError('Se coloque na lista')
+                                  
+
+Acredio que o raise seria mais um forma de evitar que valores fora do padrão sejam passados e por consequencia encerrando ação.
+
+
+3 - Block try/excep - Utilizamos esse bloco para tratar erros e evitarmos que o programa pare de funcionar de forma inesperada. Ele irá testar uma entrada e caso essa entrada 
+    gere erro, será gerado um valor padrão de retorno. Na verdade é bem interssante, pois as vezes podemos utilizar o proprio erro como uma informação para tormar uma ação.
+    Esse bloco pode estar dentro do main ou dentro de uma função
+
+
+   Estrutura
+
+           try:
+               comando que será testado
+           except:
+               oque deverá ser feito caso ocorra erro
+
+           # Na estrutura acima, é possíve especificar o tipo de erro que ocorre, por exemplo: except NameError:    Assim ele poderá ter uma ação para cada erro. Se informar apenas except
+             ele irá gerar a mesma coisa para cada erro. 
+
+           # Outra forma de utilizar o except é except TipoError as err:  Assim caso use o err em um print você terá uma saida que não causa erro e nem informa o erro. 
+
+
+
+          Podesmos fazer
+
+	try:
+           comando
+       except NameError:
+           executa oque for
+       except:
+           executa qualquer outro error           # Já usei essa estrutura para me voltar um valor padrão quando ocorrer error, assim obtia o resultado esperado.
+ 
+
+OBS: Tenho que pegar costume de usar o None, é bem importente. 
+
+
+4 - Block try/except/else/finally
+
+
+Segundo o professor a função do usuário é destruir o sistema ou seja, toda entrada do usuário deverá ser tratada. 
+
+
+Revisando o conteúdo acima temos
+
+
+try: 
+ comando   # que irá testar o comando caso ele gere erro
+except tipo do erro # tipo do erro é optativo, caso você informe um tipo except espefico ele irá tratar somente um tipo de erro ou somente except tratará de forma generica:
+ comando #ai ele executa o comando
+else:  #Caso o try de certo, ele irá executar o try, do contrário não
+ comando
+finally: #Sempre irá executar, independente do que acontecer acima... meio desnecessário n[e  
+ comando
+
+
+
+
+5 - Debugando em python. Irei passar mais brevemente pois o interessante é usar. 
+
+ Para isso iremos aprender duas ferramentas o Deub que é do pychmar que é top e o Python Debugger que é da biblioteca pdf e é uma versão mais simples e menos interativa do Debug
+
+
+Primeiro com o pycharm debugger:
+  Podemos realizar de duas formas, clicar direto no inseto do lado do play em python irá rodar o debuger. Ou podemos clicar no numero da primeira linha e na ultima que queiramos testar
+  assim ele irá rodar somente as linhas que irão ser testadas.
+  Basicamente ele roda monstrando o print de tudo sem ter de colocar print. Isto teria ajudado muito antes. É bem intiuitivo de usar. 
+
+
+Segundo com o Pycharm, antes da versão 3.7 era preciso importar ela de função biblioteca, agora ela é uma função build-in. Ou você importa o pdb e usa a função pdb.set_trace() ou usa a built-in breakpoint(), o resultado será simplesmente o mesmo.
+
+
+
+Diferente do debug, aqui precisamos escrever o ponto aonde queremos começar o teste. E ele terá os seguintes comandos.
+
+l listar aonde estamos no código
+p imprimir(basicamente o imprimir serve para quando o nome de nossas variáveis coincidem com os comandos)
+c continua a excecução do programa/finaliza
+
+
+A biblioteca pdb é uma exceção possui uma exceção, ela pode ser excutada assim
+
+import pdf; pdb.set_trace()  #Receque que aqui ele usa um delimitador..
+
+
+
+Tomar cuidado, biblitecas build-in são apenas aquelas que não precisamos importar bibliotecas...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    

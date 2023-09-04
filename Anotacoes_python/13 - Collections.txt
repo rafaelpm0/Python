@@ -1,0 +1,115 @@
+Os collections são bibliotecas para aplicação de funções ou formatação de estrutura para analise de dados.
+
+Collections - High-performance Container Datetypes. 
+
+
+1 - Counter - Recebe um interável  como parametro e cria um objeto do tipo Collections Counter que é parecido com um dicionário, contendo como chave um elemento 
+da lista  passada como parametro e como valor a quantidade de ocorrencias desse elemento. 
+
+	Basicamente ele cria um dicionario, tempo como chave cada elemento do grupo analisado e conta quantas vezes eles existem.
+
+Para utilziar é preciso importar a biblioteca com:
+
+from collections import Counter    # Essa estrutura será estudada mais para frente.
+
+ lista = (1, 1, 1, 3, 4, 5, 5)
+
+res = Counter(lista) #Caso imprima esta estrutura sera retornado  1: 3, 3:1, 4: 1, 5:2  ou seja, a conta de cada elemento.
+
+obs: Este recurso funciona com qualquer tipo de dado a principio.. e com string ele conta letras
+
+
+obs:  função coleção.most_common(parametro) # com essa função ele retorna os numeros mais comuns, sendo parametro a quantidade de comuns que você quer, nesse caso os 5 mais comuns
+
+
+2 - Default Dict - Todos os erro de keyerror que ocorrer quando estamos utilizando dicionários, podem ser resolvidos usando uma variável padrão para 
+setar um valor padrão para cada key que seja informada e ela não exista. Tenho de ver se ele seta um valor padrão ou se ele apenas imprime. Voltando ao assunto, para podermos 
+definir um valor padrão é necessário na estrutura usar um Lambda, oque é uma variável que toma forma de qualquer variável que não exista no conjunto, e juntando ao default dict,
+temos um valor padrão para cada key que não exista.
+
+
+exemplo:
+
+from collections import defaultdict
+
+dicionario = defaultdict(lambda: 0)     # Perceba que defini um valor padrão.. ou seja toda chave que não existir irá ter o valor 0
+
+print(dicionario[carro])  # irá imprimir zero, mas normalmente daria erro caso eu não tivesse setado um valor padrão
+
+dicionario[teste] = 'hue'   # a segunda chave do dicionário será teste com valoração de hue. Da mesma forma que um dicionário comum. 
+
+
+3 - Ordered Dict - Cria um dicionário onde é lembrada a ordem de entrada dos elementos. Como estudado anteriormente, um dicionário não importa a ordem dos elementos, ou seja
+2 dict com as mesmas chaves e valores, são dois dicionário iguais, independente da ordem. Já com Ordered Dict isto não ocorre, ele irá reconhecer como 2 dicionário diferentes.
+
+
+from collections import OrderedDict
+
+
+dicionário = OrderedDict({a: 1, b: 3, c: 4, d: 5, e: 6})
+
+4  - Namedtuple - cria um modelo de tupla que possui nome, assim toda vez que for criada uma tupla usando esse modelo ele tera nome e conteudo dentro dele.
+
+from collections import namedtuple
+
+Forma 1 de criação
+
+tupla = namedtuple('chachorro', 'idade raca nome')  #Assim sempre que eu imprimir essa tupla ele ira retornar - cachorro(idade, raca, nome) no caso o valor destas variáveis
+
+Forma 2 de criação
+
+
+tupla = namedtuple('chachorro', 'idade, raca, nome')  # Tera o mesmo resultado da anterior.
+
+
+Forma 3 de criação
+
+
+tupla = namedtuple('chachorro', ['idade', 'raca', 'nome'])    #tera o mesmo resultado da primeira. Repare que podemos separa por aspas, aspas e virgula e criar uma lista.
+
+
+Valorando a variável 
+
+tupla = cachorro(idade=2, raca='xx', nome='fé')  # Aqui ele aceita tanto indice para valorar quanto informar o nome do item do qual está sendo tratado, assim criamos um modelo de tupla.
+							oque eu percebi é que essa named tuple tem de ficar primeiramente armazenada em uma variável, tentar criar um modelo sem..
+
+Acessando os dados:
+
+	Para acessar os dados de uma named tuple temos duas formas, sendo elas:
+
+	a - indice:   print(tupla[0])
+		      print(tupla[1])
+		      print(tupla[2])
+
+	b - Pela 'chave' da tupla: print(tupla.idade)
+				   print(tupla.raca)
+				   print(tupla.nome)     Da mesma forma que na valoração, estamos nomeando esta tupla utilizando seus indices que foram nomeados.
+								podemos dizer que é um tipo de classe.
+
+Metodos count e index funcionan, lembrando que tupla.count('vira-lara') ira contar quantos virá latas foram informados e tupla.index('vira-lara') irá retornar o primeiro
+indexador que conter a palavra 'vira-lata'.
+
+
+	
+4 - deque  - basicamente o deque permite fazer um split de forma mais simples e adicionar e remover elemetos de uma lista tanto da direita quanto esquerda
+
+
+form collections import deque
+
+a = deque('testehuehue')   #cada letra irá virar um item da lista
+
+a.pop() 
+a.popleft() remove item da esquerda
+
+a.append() adiciona item na direita
+a.appendletf() adiciona item na esquerda
+				
+							
+
+
+
+
+
+
+
+

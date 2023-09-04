@@ -1,0 +1,299 @@
+Neste modulo será explorado como abrir, ler, criar, alterar um arquivo de dentro do proprio python. Assim já automatizando diversas tarefas. É importante saber trablhar com a manipulação de arquivos em python. 
+
+
+1 - open() - Essa função recebe como parametro apenas o arquivo caso ele seja dentro do python, ou caminho junto do nome do arquivo a ser aberto. Será retornado um objeto do tipo 
+_ioTexIOWtWapper. Caso seja informado um arquivo ou um caminho no qual não exista o arquivo será retornado FileNotFoundError.
+
+Caso seja impresso um open, ira aparecer isto: <_io.TextIOWrapper name='texto.txt' mode='r' encoding='cp1252'>
+
+
+Repere que ele tras o nome do arquivo, o mode abertura onde 'r' siginifica leitura e o enconding que signific a forma que ele le os caracteres.
+
+1.1 Apos abrir o arquivo, devemos usar a função read() para poder lelo, normalmente o open será armezanado em alguma variável. E uma caracteristica de objetos python, que não sejam coleções é que após sua manipulação que aqui no caso é leitura, ou no generator object é sua transformaçõa em um objeto "legivel" eles são apagados da memória... após armazenar o read() em uma variável é possível usar funções como o split(), upper()..
+
+Outra funcionalidade da função read é que ela aceita um parametro opcional  numerico, caso informe o parametro ele irá retornar somente até o numero digitado. Tipo um ler até x
+
+
+2 - Seeks e Cursor - A função seek() é utilizada para movimentar o cursos dentro do arquivo, porem ele funciona com apenas alguns módulos de abertura de arquivos, não com todos.
+    A função seek() recebe um parametro numerico, no qual é possível percorrer o arquivo txt até a posição desejada, ele começa em 0 e vai até o infinito e além. O Esta função ela leva o cursos do arquivo para posição digitada, note que ele "altera" o arquivo em sí, então da mesma forma as funções sem ed no final, ele não gera um arquivo. 
+
+3 - readline() - A função le os o arquivo depois de aberto linha a linha, sendo que cada vez que é executada a função uma linha é lida e a mesma é excluída da memória. 
+
+ 
+
+Ex 1 e 3:
+
+Para abrir o arquivo podemos fazer de duas formas, nomeando uma variável com open ou usando o metodo with (pesquisa rmais sobre o metodo with)
+
+
+arquivo = open('texto.txt', 'r')          # note que aqui eu poderia fazer x = arquivo.read() e x.split(" "), assim iria resultar em uma variável que possui um split de todas as palavras
+                                            assim poderiamos aplicar um len ou usando a função readline no x, podemos contar o numero de linhas. Tudo depende de como iremos usar. 
+ 
+with open('texto.txt', 'r') as arquivo:
+    print(arquivo.read())
+
+with open('texto.txt', 'r') as arquivo:
+    print(arquivo.readline())
+
+Aqui estou abrindo ambos os arquivos em modo de leitura r = read, apenas para mostrar todo conteudo e a primeira linha repestivamente.
+
+
+
+2 - Aqui irá começar a partir do quinto caracter ou quarto, não vi direito ainda.
+
+with open('texto.txt', 'r') as arquivo:
+    arquivo.seek(4)
+    print(arquivo.readline())
+
+
+1.2 - Ao utilizarmos open() estamos criando uma coneção entre o arquivo e o python chamada de striming, ou seja, abrimos o arquivo e quem esta tentando acessa-lo fica impedido que modifica-lo, enquanto este esta sendo utilizado. Assim após realizar as alterações necessárias no arquivo precisamo fecha-lo com a função close()
+
+a - open()
+
+b - manipulações
+
+c - close()  o close pode funcionar de duas formas, caso não haja variável contendo o open basta usar close("caminho"), caso o txt esteja contido em alguma variável basta fazer: variável.close()
+
+
+1.3 - Função closed() pode ser feita da mesma forma que o close, porem ele apenas retornar se o arquivo esta aberto ou não. Se estiver aberto é false e se estiver fechado é true.
+
+
+4 - Bloco with serve para trabalhar com o arquivo utilizando open(), porem o arquivo irá se manter aberto somente dentro bloco.
+
+with open() as variavel:
+  comandos tipo read, readline e por ai vai.
+
+5 -  Modos de um arquivo. Ao abrir um arquivo usando o open(), seu modo padrão é 'r' ou seja leitura, assim para podermos escrever no arquivo, assim alterando o TXT, precisamos utilizar 
+     o modo de escrita ou write em ingles, open(nome, 'w') o modo sempre será o segundo parametro dentro de aspas sendo eles:
+
+    r - read, serve somente para leitura
+    w - write, serve para escrever. Toda vez que abrirmos o arquivo com o modo write ele sobrescreve o arquivo anteriro e se quisermos usar varioas write devemos abrir o arquivo em um bloco         with conforme apresentado anteriormente. Ao abrirmos um arquivo inexiste o mesmo é criado na pasta onde o ambiente virtual foi criado. Importante anotar que o write funciona somente         com string, nenhum outro caracter é aceito, para incerir é preciso converter. 
+    x - abre somente para criação e escrita. Caso o arquivo já exista ele retorna um erro, feito para criação do arquivo somente. Ele gera FileExistsError. Aqui podemos usar um try: except         para fazer algum tratamento de erro existente.
+    a - Serve para adicionar informações no fim do arquivo. O write sempre irá reescrever e o append "a" sempre irá colocar no final, mesmo se tentarmos usar o seek() para mudar a posição
+        do cursor, o mesmo não surte efeito. Igual o modo "x" caso não exista o arquivo, este será criado 
+    + - serve para adicionar no final de umas das letras, para abrir o modo de update, sinceramente não ficou muito claro. Acredito que seja para usar como r ou w para habilitar o seek para         mudar o arquivo. e caso usemos com w e seja lido primeiro como ele reescreve irá apagar. 
+ 
+
+Exemplo usando w:
+
+with open('texto.txt', 'w') as arquivo:
+    arquivo.write('Introduzindo novo texto') Aqui ele irá criar se o arquivo txt não existir ou irá reescrever caso exista.    
+
+
+Exemplo mais complexo usando write:
+
+with open('texto.txt', 'w') as arquivo:
+    while True:
+        texto = input("Insira um texto ou digite sair: ")
+        if texto != 'sair':
+            arquivo.write(texto + '\n')
+        else:
+            break
+
+Exemplo usando o modo x para tratar um erro de arquivo já existente:
+
+try:
+    with open("texto.txt", 'x') as arquivo:
+        arquivo.write('Novo texto teste')
+except FileExistsError:
+    print("Arquivo já existe")
+
+
+6 - StringIO - Usando o StringIO, podemos criar em memória um arquivo para caso não tenhamos permissõa de criar um arquivo txt ou afim.
+
+import io from StringIO
+
+mensagem ="teste"
+
+arquivo = StringIO(mensagem)
+
+
+arquivo.read()   # Assim estamos usando a memória ran para aplicar a alocação de banda desse arquivo. Podemos também usar os demais comandos como seek, write.
+
+7 - Navegando em arquivos. Para manipular arquivos em python, devemos usar a biblioteca os
+
+import os   - na qual os significa operating system
+
+a - os.getcwd() - get current word directory -  pegue o diretório/pasta corrent. Assim ele irá retornar o local que esta sendo a aplicação atual do python. Retorna o caminho absoluto
+                                             ou seja, o caminho completo, não somente a pasta atual.
+b - os.chdir() - change director - igual ao cd do windows. Sempre entre aspas o comando, caso coloque .. ele retorna um diretório para cima e caso informe outra pasta ele desce.
+
+c - os.path.isabs() - is absolut - aqui ele irá retornar se o caminho do arquivo é absoluto. Acredito que o caminho absoluto aponta para c.. Em windows é preciso tomar cuidado,
+                                   pois para corrigir uma inconsistencia com o windows, é preciso sempre colocar duas // para que uma indique que a outra é uma barra
+
+
+d - os.name  - retorn o nome do sisteam operacional, sendo nt para windows e posix para Linux e Mac.
+
+e - os.uname() - retorna informações sobre o sistema
+
+f - os.path.join()  - Esta função recebe duas variáveis, onde ele irá juntar um path com outro, normalmente usado para acessar um nivel menor.
+                      ex: os.path.join(getcwd(), "caminho") assim ele irá juntar o path atual com o "caminho"
+
+h - os.listdir()   -  como o nome sugere, esta função lista o diretórios. E caso informemos um diretório como parametro, temos assim os diretórios do parametro.
+h1 - os.scandir()  - gera um objeto do tipo ScandirIterator, provavelmente igual o generator
+
+Ao usar o scandir, ele deixar em aberto a leitura, assim o ideial é colocar dentro de uma variável ou de um with
+
+arquivo = list(os.scandir())
+
+with list(os.scandir()) as arquivo:
+ comando
+
+
+i - Diversos - 
+
+arquivo = list(os.scandir())
+
+arquivo[0].inode() - tras um numero da memória 
+arquivo[0].is_dir() - Retorna verdadeiro se for um diretório
+arquivo[0].is_file() - Retorna verdadeiro se for um arquivo
+arquivo[0].is_symlink - Retorna se verdadeiro se é um linl simbolico. Tipo um atalho para nuvem
+arquivo[0].name - Retorna o nome do arquivo
+arquivo[0].path - Retorna o caminho do arquivo
+arquivo[0].stat() - Retorna varias informações statisticas, incluindo o tamanho do arquivo
+
+
+8 - Manipulação de arquivos:
+
+a - os.path.exists("caminho") - verifica se o caminho do arquivo existe. Caso seja informado apenas o arquivo irá verificar no local que esta rodando aquela aplicação python. Caso seja                             informado o caminho absoluto ele também irá verificar. Caso seja informado apenas um diretório, ele verifica se o diretório existe também, conhecido como path                        relativo
+
+b - os.mknod("caminho ou path com nome do arquivo") - esse comando irá criar o arquivo desejado. Além disso ele irá retornar FileExistsError caso o arquivo já exista.
+
+c - os.mkdir("caminho e nova pasta") - este comando serve para criação de um diretório. Se existir o caminho irá ocorrer FileExistsError e caso não tenha permissão irá ocorrer                                        PermissionError. Nesta função podemos criar um diretório por vez, criar pasta e subpasta não funciona
+
+d -   os.mkedirs("caminho e nova pasta", exist_ok= True/False) -  a diferença deste para o mkdir, é que pode ser criado subpastas e alocar o arquivo nesta subpasta. Nesta função temos um                                                                   segundo parametro que não irá retornar erro caso o diretório já exita e para isso exist_ok=True 
+                                            
+f - os.rename(nome antigo, nome novo)  - esta função serve para renomear arquivo ou diretórios, lembrando que para alterar os diretórios temos informar apenas o caminho. Se o caminho
+                                         não existir teremos um FileNotFoundError. Se o diretório que estiver sendo renomeado não estiver vaziu teremos FileNotFoundError
+
+g - os.remove(diretório ou d/arquivo ou arquivo)    - tomar cuidado com o comando de exclusão pois ele excluir permanentemente, para mandar para lixeira, usar o send2trash lib. Além disso                                                       caso arquivo o qual está sendo excluido estiver aberto, o Windows irá acusar error. Caso não exista o arquivo, FileNotFoundError
+
+h - os.rvdir(diretório)  - remove o diretório caso ele esteja vaziu apenas do contrário irá retonar OSError. FileNotFOundError se não existir 
+
+i - os.removedirs(diretorio)  - remove todo diretório que estiver abaixo, porem se existir arquivos na sub pasta o processo para
+
+j - pip install send2trash  - serve para enviar o arquivo para lixeira ao inves de excluir ele de forma permanete. 
+
+from send2trash importa send2trash
+
+send2trash(arquivo/caminho)  envia direto para lixeira. Se o arquivo não existir retemos OSError
+
+
+
+obs - Para usar o pipinstall é preciso usar ele pelo cmd e não o terminal python, pois é o pip é um gerenciador externo.
+
+ 9 - Tempfile, basicamente estamos trabalhando com arquivos temporários que irão ser excluidos após o termimo da manipulação, ou seja, abre, manipula, fecha e apaga. Para isso iremos importar a biblioteca tempfile
+
+import tempfile
+
+     with tempfile.TemporaryDirectory() as tmp:
+          comandos ## Repare que aqui criar um diretório temporário, ou seja, podemos criar arquivos normais porem eles serão excluidos após o uso.
+          with... podemos usar with aninhamos aqui para fazer oque der na telha 
+
+obs: tomar cuidado pois assim que o bloco é encerrado a o conteúdo deixa de existir.
+
+
+obs2: não funcionar com windows oque foi passado acima. Provavelmente... preciso testar
+
+
+with tempfile.TemporaryFile() as tmp:
+    tmp.write(b'conteudo' )                # Repare que aqui o nome do arquivo temporario é tmp.
+    tmp.seek()
+    print(tmp.read())
+
+obs: para escrever no arquivo temporario deve ser escrito usando b ou seja em binário.
+obs: Caso não usemos o bloco with, temos de fechar o arquivo para ele não ficar perdido na memória.
+
+arquivo = tempfile.TemporaryFile()
+arquivo.write(b'Conteudo')
+print(arquivo.read())
+arquivo.close()
+
+
+
+arquivo = tempfile.NamedTemporaryFile()
+arquivo.write(b'Conteudo')
+arquivo.close
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+           
+
+
+
+
+
+
+
+
+
+
+
+
+   
+                      
+                   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+

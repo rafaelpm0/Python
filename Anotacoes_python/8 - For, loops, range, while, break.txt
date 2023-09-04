@@ -1,0 +1,139 @@
+A aplicação do for é bem diferente da realizada em C++, irei colocar a estrutura e exemplos, porem tem o mesmo objetivo 
+
+A estrutura basica é.
+
+for item in interavel:
+	comando
+
+#temos inicialmente o for que ir chamar o loop. item, que é a variavel indice, onde não é declarada normalmente, pois o python a declara e seta como 0. E interavel que é a variável
+a qual ele irá compara ou ler, algo como o limite da contagem no loop.
+
+o Interavel pode ser uma string = {comercial}, uma lista = [1, 3, 5] ou range[0, 1]
+
+Exemplos praticos, para os exemplos vou usar as variaveis abaixo:
+
+nome = 'Rafael Pinho Medeiros'
+lista = [1, 6, 10, 99]
+numeros = range(1, 11)  # o range siginifica de até menor 
+
+1 - string
+
+for indice in nome:   #O nome será impresso letra a letra em cada linha, o python diferente de outras linguaguens tem um definicção de que cada linha é pulada de forma automatica
+	print(nome)   #para mudar isso, temos que usar no final "  , end=''
+
+2 - lista
+for numero in lista:
+	print(numero)   #Neste caso será impresso cada numero da lista um em abaixo do outro. Acredito que o mesmo conceito de end='' se aplica.
+
+3 - range
+ 
+for alcance in range(1, 11):  #Segue a mesma logica dos anteriores porem a função range ela preenche uma variavel usando dois numeros separados por virguar dentro de chaves.
+	print(alcance)		# Assim ali estou informando que quero que seja impresso do numero um até o 10, diga para leitura pensar como: de, até menor.
+
+	Interessante falar sobre o for usando range que se eu fizer for in range(3): ele repete tres vezes sem usar contador. nem nada. PREFIRO C aqui é mais claro kk.
+
+4 - enumerate()
+
+A função enumerate irá pegar uma variavel (acho que funciona só com string) e irá separala em uma lista. Exemplo a variavel nome. Ele iria transformar da seguinte forma:
+ enumerate(nome), caso imprimisse seria algo do tipo. nome = (1, 'R'), (2, 'a')... e assim por diante, ele enumera cada indice da minha string.
+Pelo que eu entendi, isto serve para imprimir seu indice ou o conteudo da variavel ou até mesmo excluir algum indice desta variavel.
+ 	
+
+for num, letra in enumerate(nome):
+	print(f'{nome[0]}/{nome[1}   #basicamente oque aconteceu aqui é que eu tenho dois campo dentro da variavel nome agora, para percorrer todos preciso que seja informado dois,
+					fariaveis no for para imprimir as duas, caso eu omita coloque apenas uma vai imprimir os dois campos da lista junto, caso omita a primeira vari
+					avel com um '_' underline ela vai imprimir apenas segunda variavel, pode ser feito o contrario também. Quando fizer exercicios sobre volto aqui.
+
+
+Outros exemplos:
+
+5 - Fazendo o usuário definir a quantidade de vezes que o loop se forma
+quant = 5
+
+for i in range(1:quant+1)   #aqui lembrando que o range aqui é sempre de até menor. obs: testar com range 0 até..
+
+
+
+6 - O i in range no for, não ira funcionar caso você queria utilizar essa variavel fora do lool, pois não é armazenada em nenhum lugar.
+
+
+
+				
+Função range(int,int)/range(int)/range(int,int,int)				
+				
+A função do range é basicamente preecher/percorrer algo de até menor. Ou seja ele irá correr de até parada.				
+Temos 3 formas de utilizar o range.				
+				
+1 - Repetição simples				
+				
+	for i in range(3),      #nesta estrutura o range fara o for ocorrer 3 vezes exatamente. De forma mais completa, o range ira percorrer de zero a 2 neste caso.			
+		comando		
+				
+2 - Repetição de até,				
+				
+	a = input(range(1,10))   # nesse caso ele irá inicializar a variavel colocando os valore de 1 a 9 na variavel. Quando usados desta forma			
+				 # o range sempre usa a condição de para como se fosse  0 >= a < 10.
+				
+3 - Repetição até com passo.				
+				
+	for a in range(1, 21, 2):  #Neste caso o range ira ate o numero 20, contando de dois em dois. Pode ser negativa o passo também, o passo se refere a 			
+		comando 		ao terceiro campo no qual determina o passo no qual ele irá percorrer.
+				
+4 - Como iniciar uma lista usando range:
+
+    lista = list(range(1, 101))    #Crie uma variavel, use a função list() para tranformar em uma variável e use o range(int, int) para iniciar o valores dentro dela.
+
+
+Forma do range,				
+				
+range(valor inicial, valor final não inclusivo, passo)				
+				
+				
+
+
+
+
+Função While.
+
+A função while funcina da mesma forma que a função while em C++, o while é um loop no qual so é interrompido quando a condição de parada é atingida.
+
+while condição:
+	comando
+
+ex:
+	while a > b:       #Assim, enquanto a variavel a for maior que a variável b, será repetido o comando infinitamente.
+		comando
+
+
+O while pode ser aplicação de outra maneira também.
+
+	while true:
+		if ....   # Assim podemos realizar uma regra lógica usando o if else como centro da questão. Tenho de me acostumar a usar isto. 
+
+
+
+
+
+Função break:
+
+	Basicamente a mesma função de c++, basicamento o break quebra a estrutura na qual ele se encontra. Voltando o sistema para fora. Não vi muitas situações na
+qual usar ele, o exemplos dados foram de loops if, else na qual existe uma situação na qual era vontajoso quebrar o lool. Talvez um loop dentro um lool, algo assim
+seja interrante usar. Se eu chegar a usar alguns exemplos vou colocar aqui.
+
+
+	break 
+
+
+Função in, usada muito nos loops. A função possui a seguinte estrutura, sendo variavel(variavel local que estará disponível apenas dentro do lool) in variavel( a variavel ou numero
+ou palavra que irá percorrer o caminho inteiro). Assim sendo um if ou um for, eu consigo percorrer toda minha variavel. Fiz muito for para percorrer a lista em um if, sendo desnecessário.
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,198 @@
+Nesta seção será abordado de maneira mais completa oque são iterávies e iteradores.
+
+1 - Iterator e Iterable 
+Iterador - Um iterador é um objeto que pode ser iterado. Um objeto que retorna um dado, sendo um elemento por vez quando a função next() é chamada
+
+
+iterable - Um objeto que irá retornar um iterador  quando a função iter() for chamada.
+
+
+
+
+nome = 'geek'
+numeros = [1, 2, 3, 4, 5, 6]   Neste caso ambos são um exemplo de iterable. Iteravel
+
+
+x = iter(nome)
+y = iter(numero)   #Aqui eu transformei por meio funções de um iterable em um iterador, porem ainda sem valor, visto que é precisa chamar a função next() para chamar seu primeiro elemento.
+
+
+print(next(x))
+print(next(x))
+print(next(x))
+print(next(y))
+print(next(y))   #NEstes exemplos sim temos um iterator, onde 
+
+
+2 - Exemplo de como montar um loop for com iter()
+
+
+ def para(iterable):
+    it = iter(iterable)
+    while True:
+        try:
+            print(next(it))
+            
+        except StopIteration:
+            break
+
+
+s = [1, 3, 4 ,5 ,6, 7, 8]
+ 
+
+
+3 - Escrevendo um iterador customizado. 
+
+Para escrever um iterdor customizado temos de adentrar em orientação á objetos, mas não é para se prender muito a conceitos. Neste caso iremos definicar uma classa que irá ter o mesmo papel do range. Para isso, precisamos primeiro contruir uma classe que possa comportar o primeiro valor e o ultimo valor. Depois precisamos estabelecer o iter e depois o proximo item. Não irei entrar em detalhe em orientação pois não vi o conteudo ainda, mas para uma classe iterável, deve criar dois metodos, um do ito iter para transformar o iterable em iterator e do tipo next, pois toda vez que for executada um nexto deve-se apontar para onde ir. Não consegui entender muito bem para que serve o metodo iter, porem será interessante voltar depois de ver orientação a objetos.
+
+
+
+class Entre:
+    def __init__(self, menor, maior):
+        self.menor = menor
+        self.maior = maior
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.menor < self.maior:
+            numero = self.menor
+            self.menor += 1
+            return numero
+        raise StopIteration
+
+
+teste = Entre(1, 10)
+
+it = teste
+
+print(it.__next__())
+print(it.__next__())
+print(it.__next__())
+print(it.__next__())
+print(it.__next__())
+
+
+
+
+4 - Geradores - 
+
+Geradores(Generator) são Iteradores(Iterators), mas nem todo iterator é  um gerador. Basicamente um generators excuta parte a parte da expressão, enquanto um função normal tenta executar tudo na memória, então usando o yield, conforme abaixo. Estamos ecnonomizando memória.
+outras informações:
+
+- Gerators podem ser criados com funções geradoras
+- Funções geradoras utilizam a palavra yield
+- Generators podem ser criados com Expressoes Geradoras 
+
+
+Diferenças entre funções e funções geradoras. 
+
+Funções = Utilizam o return - retorna uma vez - Quando executada retorna um valor
+Genarators Functions = Utilizam yield - podem utilizar o yield multiplas vezes - quando executada retorna um generator 
+
+AO utilizar um yield varivael, você retorna uma instacia dela, ou seja, ao invez de execturar corrido, você esta executando parcelas da função, oque a torna mais rápido. 
+
+Um genarator Funcition gera um generator:
+
+def conta_ate(valor_maximo):
+    contador = 0
+    while True:
+        if valor_maximo > contador:
+            yield contador
+            contador +=1
+
+
+x = conta_ate(5)
+
+print(type(x))  aqui será retornado a classe como generator
+
+for i in x:
+    print(i)    aqui ele irá imprimir cada instancia do x, um generator retorna algo mais interno é preciso converter para poder visualizar.
+
+
+IMPORATENTE - a palavra reservada yield só segue para a próxima instancia quando um função next() é chamada, por isso usamos um for, assim ele aplica de forma automárica
+
+	
+def conta_ate(valor_maximo):
+    contador = 1
+    while valor_maximo >= contador:
+        yield contador
+        contador += 1
+
+
+
+x = conta_ate(5)
+y = conta_ate(10)
+
+print(type(x))
+print(type(y))
+
+for a in y:
+    print(a)
+
+for i in x:
+    print(i)
+
+print(next(x))
+print(next(x))
+print(next(x))
+print(next(x))     #Neste caso temos as duas formas de iteração com o yield que é chamado ele mesmo no for ou com next()
+
+
+Repare que o yield, executa dentro da função somente um vez, até que seja solicitado novamente seu próxmo iterator. Ou seja um generator também é um iterable. Em cada aplicação ele irá assumir seu proximo elemente, mesmo que misturado ao os metodos, ele não recomeça durente a aplicação.
+
+
+
+Estrutura para usar o yield.
+
+While condicao
+   comando
+   yield variavel
+   comando        #no yield temos algo como um estrutura para mudar o valor retornada a cada passada do next() ou for, até a chegada de seu fim.
+
+
+Comparação entre uma função normal e yield
+
+def fibonacci(valor_maximo):
+    num = []
+    a, b = 0, 1
+    while valor_maximo >= len(num):
+        num.append(b)
+        a, b = b, a+b
+    return num
+
+
+def fibonacci_g(valor_maximo):
+    a, b, contador = 0, 1, 0
+    while valor_maximo >= contador:
+        yield b                               # lembrar que o yield retorna um generator, para visualizar um tem de
+        a, b, contador = b, a+b, contador+1   # transformar em list ou numero ou usar algo como for para referenciar
+                                              #  em outra variavel
+
+print(fibonacci(10))
+print(list(fibonacci_g(10)))  # A diferença de execução por tempo e consumo de memória ficará clara quando usar um numero grande
+
+# Pode usar um for para ir printando
+
+#Genarators - No comprehention list é possível criar um generator, para isso bas trocar [] por (), ocupa muito menos espaço, porem sempre esqueço.
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+

@@ -1,0 +1,69 @@
+If e else, e elif funciona da mesma forma que em c, com pouquissimas diferenças. 
+
+obs: NÃO EXISTE SWITCH EM PYTHON, USAR IF ELSE e ELIF.
+
+ex 1:
+
+if teste logico:
+identação comando
+
+ex 2:
+
+if teste logico: 
+identação comando
+else:
+identação comando
+
+ex 3, aqui vamos fazer o elif, o primeiro comando que é exclusivo do python. Ao fazer um if aninhado, criamos algumas posibilidades. 
+Ao invez de fazer if else teste logico:
+				comando  
+Podemos substituir o if else, comumente usando para fazer if aninhado ou somente um if embaixo do outro também serve. Para ficar mais claro,
+que estamos fazendo um if aninhado basicamente. 
+
+if teste logico:
+identação comando
+elif teste logico:
+identação comando
+(quantos elif precisar e finaliza com um else)
+else:
+identação comando
+
+
+EXEMPLODE IF COM TRUE E FALSE.
+
+variavel = True
+if variavel:
+	comando    # repare que aqui a fariavel será o parametro do If, else. Verdadeiro executa if, falso executa else.
+
+
+Dentro do teste lógico igual em c++, podemos fazer algumas operações utilizando os operadores logicos.
+
+> maior
+< menor
+>= maior ou igual
+<= menor ou igual
+== igual (com numeros usa este)
+
+!= diferente (acho que deve ser igual a c, preciso testar)
+
+Oque diferen um pouco em python em relação aos operadores da logica formal and, or, not e is (usado para teste logico se algo é (==) a algo)
+
+and (e, os dois precisam ser verdadeiros)
+or (ou, um dos dois precisa ser verdadeiro)
+not (negação)
+is (igualdade, normalmente usado somente com booleando, testar se funcionar com string)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

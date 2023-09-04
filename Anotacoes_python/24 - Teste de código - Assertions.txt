@@ -1,0 +1,48 @@
+Porque testar o código. Aquela ladainha de sempre, para encontrar bugs, para melhorar desempenho, verificar comportamento tanto individual quanto em conjunto. 
+
+Também existe o TDD - Test Development Driven - Ou seja, programação orientada em testes, primeiro se cria o teste, depois escreve o código para que o teste passe. Ou seja, primeiro o teste
+gera erro, depois ele é escrito um código para o teste passar.
+
+
+1 - Assertions -  Em python assertions são usados para fazer uma verificação, um teste por assim dizer. Para usar Assertions usamos a palavra assert. Se a expressão for verdadeira retorna none, e caso seja falsa levante um erro do tipo AssertionError. Podemos passar um segundo parametro para levantar um erro e também devemos lembrar que o assert não é só usado para testar o código, podemos usar ele no meio de qualquer código.
+
+
+
+def soma_positivo(a, b):
+    assert a >= 0 and b >= 0, 'Ambos numeros devem ser possitivos'   #Condição e mensagem de erro personalizada 
+    return a + b
+
+soma_positivo(1, -9)
+
+
+ALERTA, cuidado ao usar assert, pois ao executar o python pelo terminal com parametro -v nenhum assertion terá validade.
+
+2 - Docteste - são testes que colocamos dentro da documentação da função. Para isso utilizamos  >>> a função (os parametros) e abaixo o resultado esperado
+		Para rodar um doctest no console python, python -doctest -v nome_do_modulo.py	
+
+def soma(a, b):
+    """
+    >>> soma(1, 2)    #podemos criar quantos testes quiser, deste que siga >>>funcao(valores) resultado
+    3
+    """
+    return a + b 
+
+Para fazer leventar erro, tem de fazer igual as mensagem do python, igual mesmo.
+
+imagine que um teste que fizer é para gerar erro e levantar erro, para isso, devemos
+
+escrever
+
+Trace back (most recent call last):
+    ...
+TypeError: unsupported operand type(s) for *: 'int' and 'NoneType    #estudar melhor isso
+
+
+obs: Dentro do docteste o python não reconhece aspas duplas, precisa colocar aspas simples, caso contrario irá gera falso erro e, caso utilize um txt ou outro local que não seja p python para escrever o código, tomar cuidado na resposta do doctest porque se você colocar espaço depois do True, pode gerar erro.
+
+
+
+
+
+
+

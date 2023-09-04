@@ -1,0 +1,83 @@
+
+
+
+
+1 - Higher Order Functions - Funções de maior grandeza. Já visto em funções, mas significa que podemos ter funções como parametros de funções ou funções que retornam
+outras funções.
+
+2 - Nested Functions - Funções aninhadas. Quando temos uma função dentro de uma função, também conhecidas como Inner Functions 
+
+3 - Decoradores. Decoradores são funções, funções que envolvem outras funções e aprimoram seus comportamentos. 
+
+Os decoradores tem sintaxe propria, usando o @ que é Syntact Sugar ou açucar sintatico. 
+
+Decoradores são uma forma de você aplicar o resultado de uma função em um função pre definida, ou seja ele irá converter o seu resultado para algo 
+
+A utilização de um decorador funciona da seguinte maneira, ela irá pegar a função com @ e irá passar o seu valor retornado para função decoradora. Dentro da 
+função decoradora você deve criar duas funções, sendo que o parametro da primeira função será o retorno.
+
+
+Ex: def decorador(funcao):
+    def tratando():
+        valor = int(funcao()) * 2    #Tomar cuidado pois caso não tenha parenteses você não esta chamando o retono da funcao, acho que você chama o objeto função e não seu retorno
+        return valor
+    return print(tratando())
+
+
+@decorador
+def decorado():
+    valor = int(input('Digite um numero e sera retornado seu dobro: '))
+    return valor
+
+
+Repare que aqui foi feito oque: um função criada e ela foi tratada pelo decorador.
+A principal função de um decorardor é, deixar função passada como parametro de forma mais facil de se ver ou quando esse tratamento é usado de formas repetitivas.
+
+
+4 - Decoradores com argumentos. 
+
+Aqui usando um terceira função no inicio para definir um argumento que será usado no tratamento deste decorador, ou seja, é possível definir uma variável para o decorador
+
+def verifica_primeiro_argumento(valor):
+    def decorador(funcao):
+        def tratamento(*args, **kwargs):
+            if args and args[0] != valor:
+                return f'Valor incorreto! Primeiro argumento precisar ser {valor}'
+            return funcao(*args, **kwargs)    #caso de certo aqui retorna propria funcao
+        return tratamento   # apenas para fechar
+    return decorador        # apenas para fechar
+
+
+@verifica_primeiro_argumento('M')
+def comida(*args):
+    print(args)
+
+@verifica_primeiro_argumento(10)
+def soma(num1, num2):
+    sun = num1 = num2
+    return sun
+
+
+print(comida('M'))
+print(soma(12, 10))
+
+
+5 - Preservando metadata com Wraps. Meta data são dados intrinsicos em arquivos. 
+
+Usando from functools import wraps
+
+
+Ex: def decorador(funcao):
+    def tratando():
+        @wraps(funcao)
+	"documentacao"
+	valor = int(funcao()) 
+        return valor
+    return print(tratando())
+
+Caso não seja feito o wrap, ele irá confundir a documentação da função informada no decorador com a função decorada.
+
+
+
+
+

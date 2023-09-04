@@ -1,0 +1,239 @@
+Orientação à objetos, não passa de uma forma de organizar informações de forma que estas representem a realidade de alguma forma. 
+Por exemplo: como representar um automovel, um empresa, etc. E dentro de cada representaçõa usamos funções para demonstrar seu comportamento 
+
+
+Os principais elementos da orientação há objetos são:
+
+- Classe - Modelo do objeto do mundo real sendo representado computacionalmente 
+- Atributo - Caracteristica do objeto
+- Método - Comportamento do objeto (funçõe)
+- Construtor - Método especial utilizado para criar objetos
+- Objeto - Instancia da classe (iniciar uma variável com a classe)
+
+
+1 - Classes - Classes são nada mais, nada menos do que modelos dos objetos do mundo real representados por códigos
+
+
+As classes podem conter:
+a - Atributos - Representam as cracteristicas dos objetos. Ou seja, representados oque da forma ao objeto
+
+b - metodos - funções que representam o comportamento ou seja ações que irão ocasionar algo no sistema. 
+
+
+Em python para criar uma classe usamos a palavra reservada Class, a classe sempre deve ser iniciada em letras maiusculas e quando a palavra for 
+composta. 
+
+Quando criamos um bloco de código que ainda não está pronto, para nao acusar erro, usamos a palavras pass.
+
+Não utilizar nomes de classes com letras minusculas, pois o python utiliza esta forma para suas classes como int, float etc
+
+class Primeiro:
+    pass          #Exemplo usando pass
+ 
+
+
+2 - Atributos - Atributos represetam caracteriscas do objeto, ou seja, a represetação dos itens que fazem um objeto ser aquele objeto.
+
+
+Em python os atributos são divididos em três tipo:
+- Atributos de classe
+- Atributos de instancia 
+- Atributos dinâmicos
+
+
+a - Atributos de Instancia: São atributos declarados dentro do método contrutor (__init__)
+	metodo contrutor é um método para criar em alocar os atributos, ou seja, constroi as caracteristicas do objeto.
+	Siginifica que toda vez que esta classe for criada, estes atributos também serão criados
+
+
+class lampada:
+    def __init__(self, voltagem, cor):   #init é o construturo da classe e para criar elementos na classe, devemos criar um função que tenha parametros para receber valores 
+        self.voltagem = voltagem         # e depois alocamos por meio do self que seria algo como na propria classe esse parametros para virarem atributos
+        self.cor = cor
+        self.ligado = False    # reparece que esse atributo já vem valorado por padrão no init. 
+
+O construtor da classe é feito por meio de init, porem init é uma convenção na progração, poderia ser qualquer palavra. 
+
+
+b - atributo publico e privado. Em python por convenção todo atributo é publico por convenção. Para criar um atributo privado, você deve utilizar dobleunder após self. em cada
+    atributo. Quando um atributo é privado, isso significa que este atributo deverá ser acessado apenas dentro da propria classe, ou seja, para acessa-lo de maneira correta deve-se
+    utilizar um metodo proprio da classe. Isso é conhecido como Name Mangling.
+
+
+class lampada:
+    def __init__(self, voltagem, cor):
+        self.voltagem = voltagem
+        self.cor = cor
+        self.__ligado = False
+
+
+Para fazer acesso ao atributo __ligado o correto seria criar um método para isso. Porem após instanciar a classe, podemos fazer da seguinte forma. 
+
+teste  = Lampada(220, 'azul')
+
+
+print(teste.__lidago)   # Caso tentemos fazer com um atributo privado, ocorrera AtributeError
+
+
+print(teste.__Lampada__ligado) # Assim podemos acessar o atributo mesmo sendo privado. Não é o correto é bom fazer apenas para testes no desenvolvimento. 
+
+
+c - Atributos de classes -  Diferente dos atributos de instancia, os atributos de classe serão compartilhados por todas as classes e não receberam novos valores toda vez que a 
+			    que a classe for instanciada. 
+
+
+class Lampada:
+
+    desconto = 0.25  # atributo de classe
+
+    def __init__(self, voltagem, cor, valor):
+        self.voltagem = voltagem
+        self.cor = cor
+        self.valor = (valor * Lampada.desconto)   # repara que para acessar a variável eu tenho que chamar a classe
+        self.__ligado = False
+
+
+teste = Lampada(220, 'azul', 30)
+
+Você pode acessar o atributo de classe por:
+
+teste.desconto  # incorreto pois o atributo é de classe e não de instancia, assim deve ser acessado
+
+Lampada.desconto # o correto é acessar pela classe, até porque em cada instancia o valor do atributo de classe pode mudar.
+
+class Lampada:
+
+    desconto = 0.25
+    contador = 0
+
+    def __init__(self, voltagem, cor, valor):
+        self.id = Lampada.contador + 1   # aqui estamos criando um id para cada objeto e auto incremental
+        self.voltagem = voltagem
+        self.cor = cor
+        self.valor = (valor * Lampada.desconto)   # repara que para acessar a variável eu tenho que chamar a classe
+        self.__ligado = False
+	Lampada.contador = self.id
+
+
+d - Atributo dinamico - Atributo dinamico diferente dos demais, pode ser criado apenas em uma ou mais instancias da classe. 
+
+
+ 
+class Lampada:
+
+    desconto = 0.25
+    contador = 0
+
+    def __init__(self, voltagem, cor, valor):
+        self.id = Lampada.contador + 1   # aqui estamos criando um id para cada objeto e auto incremental
+        self.voltagem = voltagem
+        self.cor = cor
+        self.valor = (valor * Lampada.desconto)   # repara que para acessar a variável eu tenho que chamar a classe
+        self.__ligado = False
+        Lampada.contador = self.id
+
+teste.descricao = 'CONTEUDO '   # aqui estamos criando um atributo dinamico, ou seja apenas no tempo de execução. 
+
+print(teste.descricao)
+
+
+e - Transformando em dicionário 
+
+Caso você pega a variável que foi instanciada, você pode aplicar teste.__dict__ que irá transformar as informações em um dicionário.
+
+
+
+
+3 - Métodos - Representam os comportamento que um objeto pode realizar, ou seja, suas funções ou ações. 
+
+	Em python os métodos são dividos em duas formas, os métodos de instancia e métodos de classe.
+
+
+Metodos de instancia, são usados toda vez que uma classe for instanciada ou seja, valorada. Enquanto metodos de classe são todas as demais funções fora do construtor.
+
+
+a - Dunder init ( __init__ ) é o metodo de especial de construção e sua função é construir o objeto de uma classe.
+
+obs: todo elemento em python que inicia e terminar com __ duplounderline é chamdo de dunder.
+
+Evite ao máximo criar metodos com dunder, pois os métodos buildin de python podem sem comprometidos.
+
+
+Os nomes dos métodos são escritos em letras minusculas, caso o nome seja composto deverá ser separado por underline
+ 
+
+Pesquisar sobre a biblioteca passlib e sua função pbkdf2_sha256 e função função .hash(senha, rounds='numero', salt_size='numero') e funcao .verify(senha, senha critografada)
+ex:
+class Produto:
+
+    contador = 0
+
+    def __init__(self, descricao, cor, valor):
+        self.id = Produto.contador + 1   # aqui estamos criando um id para cada objeto e auto incremental
+        self.descricao = descricao
+        self.cor = cor
+        self.valor = valor   # repara que para acessar a variável eu tenho que chamar a classe
+        Produto.contador = self.id
+
+    def desconto(self, porcentual):
+        return (self.valor * (100 - porcentual)) / 100
+
+
+p1 = Produto('Carro', 'azul', 10_000)
+print(p1.desconto(10))
+
+
+b - Metodos de classe. São metodo que são iguais para toda a classe. Ou seja, não devem sofrer alteração com base no instanciamento de cada objeto. Sofrer alteração no sentido
+    de que o conteudo do instanciamento afeta e não que deve ser estatico.
+
+c - O metodo estatico é para quando não precisarmos utilizar a classe em si. 
+
+ex b e c:
+
+class Produto:
+
+    contador = 0
+
+    @classmethod    # ao inves de self, aqui temos cls que é a propria classe. Não tente acessar pelo objeto é errado
+    def classe(cls):
+        print(f'O nome da classe é {cls}')
+        print(f'Nesta classe temos {cls.contador} produtos')
+
+    @staticmethod   # repare que ele não recebe nenhum parametro 
+    def parado():
+        print('parado')
+
+    def __init__(self, descricao, cor, valor):
+        self.id = Produto.contador + 1   # aqui estamos criando um id para cada objeto e auto incremental
+        self.descricao = descricao
+        self.cor = cor
+        self.valor = valor   # repara que para acessar a variável eu tenho que chamar a classe
+        Produto.contador = self.id
+
+    def desconto(self, porcentual):
+        return (self.valor * (100 - porcentual)) / 100
+
+
+p1 = Produto('Carro', 'azul', 10_000)
+print(p1.desconto(10))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+	 

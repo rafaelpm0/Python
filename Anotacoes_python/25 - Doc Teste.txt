@@ -1,0 +1,105 @@
+Preciso voltar e estudar, pois pulei a aula. Essa é a unica seção na qual eu copiei direto do arquivo do professor.
+
+
+
+"""
+Introdução ao módulo Unittest
+
+Unittest -> Testes Unitários
+
+O que são testes unitários?
+
+Teste é a forma de se testar unidades individuais de código fonte.
+
+Unidades individuais podem ser: funções, métodos, classes, módulos etc.
+
+#OBS: Teste unitário não é específico da linguagem Python.
+
+Para criar nossos testes, criamos classes que herdam de unittest.TestCase
+e a partir de então ganhamos todos os 'assertions' presentes no módulo.
+
+Para rodar os testes, utilizamos unittest.main()
+
+
+TestCase -> Casos de teste para sua unidade
+
+# Conhecendo as assertions
+https://docs.python.org/3/library/unittest.html
+
+Método                      Checa que
+assertEqual(a, b)           a == b
+assertNotEqual(a, b)        a != b
+assertTrue(x)               x é verdadeiro
+assertFalse(x)              x é falso
+assertIs(a, b)              a é b
+assertIsNot(a, b)           a não é b
+assertIfNone(x)             x é None
+assertIsNotNone(x)          x não é None
+assertIn(a, b)              a está em b
+assertNotIn(a, b)           a não está em b
+assertIsInstance(a, b)      a é instância de b
+assertNotIsInstance(a, b)   a não é instância de b
+
+
+Por convenção, todos os testes em um test case, devem ter seu nome
+iniciado com test_
+
+# Para executar os testes com unittest
+
+python nome_do_modulo.py
+
+
+# Para executar os testes com unittest no modo verbose
+
+python nome_do_modulo -v
+
+# Docstrings nos testes
+
+Podemos acrescentar (e é recomendado) docstrings nos nossos testes.
+
+
+
+import unittest # na pratica, importa o módulo
+
+
+from atividades import comer, dormir, eh_engracada
+
+
+class AtividadesTestes(unittest.TestCase):     # cria uma classe com unittest.TestCase e o nome das classes é com test no começo
+
+    def test_comer_saudavel(self):
+        """Testando o retorno com comida saudável."""   #nome do que o teste irá fazer
+        self.assertEqual(                       # o assertion para dizer q tipo de compração
+            comer('quiabo', True),              # a função e os parametros 
+            'Estou comendo quiabo porque quero manter a forma.'   # o retorno que deve ter
+        )
+
+    def test_comer_gostosa(self):
+        """Testando o retorno com comiga gostosa."""
+        self.assertEqual(
+            comer(comida='pizza', eh_saudavel=False),
+            'Estou comendo pizza porque a gente só vive uma vez.'
+        )
+
+    def test_domir_pouco(self):
+        """Testando o retorno dormingo pouco."""
+        self.assertEqual(
+            dormir(4),
+            'Continuo cansado após dormir por 4 horas. :('
+        )
+
+    def test_dormir_muito(self):
+        """Testando o retorno dormingo muito."""
+        self.assertEqual(
+            dormir(10),
+            'Ptz! Dormi muito! Estou atrasado para o trabalho!'
+        )
+
+    def test_eh_engracada(self):
+        # self.assertEqual(eh_engracada('Sérgio Malandro'), False)
+        self.assertFalse(eh_engracada('Sérgio Malandro'))
+        self.assertTrue(eh_engracada('Jim Carrey'), 'Jim Carrey deveria ser engraçado')
+
+
+if __name__ == '__main__':
+    unittest.main()

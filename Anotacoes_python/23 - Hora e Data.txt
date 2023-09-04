@@ -1,0 +1,155 @@
+Em python existe um módulo integrado para trabalhar com hora e data. Modulo se chama datetime
+
+1 - Definições:
+
+import datetime
+
+#Ira printar o ano máximo e minimo que é possível trabalhar em python
+
+print(datetime.MAXYEAR)
+print(datetime.MINYEAR)
+
+# Ira retornar a hora no momento da execução. Retornar ano, mês, dia, hora, minutos, segundos e, milisegundos.
+
+print(datetime.datetime.now())  # 2022-06-28 19:58:43.671014
+
+# Também repare que a biblicote datetime para criar um objeto do tipo data usamos o objeto datetime
+# Para alterar a hora de um objeto instanciado, podemos criar um objeto do tipo datetime e usar replace para definir a hora.
+# para isso usamos as palavras year, month, day, hour, second, minute, second and microsecond
+#
+
+hora = datetime.datetime.now()
+hora = hora.replace(hour=10, minute=55, second=23, year=2010)
+print(hora)
+
+
+# Para criar um objeto do tipo date time e definir sua hora, basta fazer
+
+hora2 = datetime.datetime(2099, 12, 10)  # tome cuidado, pois se for passado um keyword, todos devem ter um keyword
+
+print(hora2)
+
+# é possível acessar de forma individual cada parte da data do objeto
+
+print(hora.year)
+print(hora.month)
+print(hora.day)
+print(hora.minute)
+print(hora.second)
+print(hora.microsecond)
+
+
+
+2 - Delta - Delta em datetime, até onde eu entendi é para trabalhar com diferenças de horários. Quando você trabalha com dois objetos do tipo data, basta subtrair ou somar. Porem ela não separa em meses e sim em dias.
+
+import datetime
+
+
+hora = datetime.datetime.now()
+
+hora2 = datetime.datetime(2022, 8, 12)
+
+hora_3 = hora2 - hora
+
+print(hora_3)
+
+print(f'Falta {int(hora_3.days) // 30 } mes, {hora_3.days % 30} dias ')
+
+# Operações com tempo, podemos usar timedelta() que recebe por keyword os valores e é usado para calculo de diferenças
+# de datas. Toda vez que for feito uma operação com data é retornado um time delta
+
+print(type(hora_3)) #retorna um  class timedelta
+
+
+
+
+3 - Trabalhando com combine() e time()
+
+import datetime
+
+# combine() é usado para combinar um data com sua hora, mais o segundo, assim sobreescrevendo que tem no segundo
+# no primeiro. Assim precisa receber datetime.datime como primeiro argumento e segundo como datatime.time()
+
+hora = datetime.datetime.now()
+hora2 = datetime.timedelta(days=100)
+
+# datetime.time() trabalha apenas com horas e por default suas keyword hours, minute, second and microsend are zero.
+
+comb = datetime.datetime.combine(hora, datetime.time())
+
+print(comb)
+
+comb2 = datetime.datetime.combine((hora + hora2), datetime.time())
+
+print(comb2)
+
+4 - weekday() Para encontrar o dia da semana, podemos usar o weekday() que retorn o dai da semana por int
+
+sendo:
+
+0 - Segunda-Feira (Monday)
+1 - Terça-Feira(Tuesday)
+2 - Quarta-feira(Wednesday)
+3 - Quinta-feira(Thursday)
+4 - Sexta-feira (Friday)
+5 - Sábado (Saturday)
+6 - Domingo (Sunday)
+
+print(comb.weekday())
+
+6 - Formatando data com strftime() - String Format Time. Será utilizada em um objeto do tipo time para formata-lo.
+
+
+formatado = comb2.strftime('%d/%m/%Y')
+"""
+%d irá imprimir o dia
+%m irá imprimir o mes 
+%Y irá imprimir o ano aaaa
+b% irá imprimri o mês como sigle em ingles
+y% irá imprimir o ano aa
+
+Existem muitos outros formatos, consulte a documentação se quiser mais dados.
+
+#MUITO INTERESSANTE VERIFICAR SOBRE A BIBLIOTECA TEXTBLOB TRADUCAO SIMPLES AUTOMATICAl
+
+"""
+
+print(formatado)
+
+7 - .strptime() - Strip time, usado para receber uma string 20/02/2000 e colocada num objeto do tipo data, sem ter de fazer um strip
+
+# é usado para substitui um split em uma string, assim é mais facil preencher um objedo do tipo data com texto
+#.strptime(data como string, formatação da data)
+
+hora = datetime.datetime.strptime('18/05/2022', '%d/%m/%Y')
+hora = hora.strftime('%d/%m/%Y')
+print(hora)
+
+
+8 - timeit - Para consularmos o tempo de execução de um programa, podemos usar o timeit, que é uma biblioteca que irá nos auxiliar. Para isso iremos usar timeit.timeit(expressão, number=)
+Ele recebe a expressão diretamente entre aspas simples ou usando a biblioteca functools, functools.partial(funcao, parametro)
+
+import timeit
+import functools
+
+def expo(numero):
+    if numero > 1:
+        return numero * expo(numero-1)
+    return 1
+
+
+tempo = timeit.timeit(functools.partial(expo, 19), number=1000)
+
+print(tempo)
+
+
+
+
+
+
+
+
+
+
+
+ 

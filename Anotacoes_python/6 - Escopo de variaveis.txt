@@ -1,0 +1,6 @@
+As variaveis possuem dois escopos, sendo eles: local ou global.
+
+Da mesma forma que em C++, as variaveis que possuem escopo global, tem validade para todo o programa. Enquanto as de escopo local,
+apenas dentro da função das quais elas foram iniciadas, normalmente dentro de uma função ou algum for. POREM em python, não é necessario
+utilziar o return para jogar este valor para fora da função, pois caso ela já tenha sido inicada o python reconhece ela durante a execução
+do programa. 

@@ -1,0 +1,12 @@
+Dois comandos basicos no python
+
+dir - vai te informais quais funções ou metodos, atributos e propriedades aquele tipo de variavel aceita
+
+help - vai te informar oque aquela função ou metodo faz, junto dos parametros para uso caso tenha.
+
+
+exemplos
+dir(4)
+help(variavel marcada como int)
+
+dir("rafa")

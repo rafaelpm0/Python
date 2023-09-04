@@ -1,0 +1,165 @@
+List comprehension é utilizado para gerar listas a partir de um iterável, podemos colocar critério para geração desta lista
+
+
+ 1- A sintaxe de lista comprehension é:
+
+dado for dado in iterável
+
+O primeiro dado é o valor que ele irá assumir e o segundo é o iterável que ele usará de base caso tenha um valor. Abaixo segue um exemplo de alterando o iterável dado e de criando instância deste iterável.
+
+O primeiro dado aceita quase qualquer valor, pode ser uma função(lembre de retornar o valor), uma operação lógica ou matemática.
+
+O iterável acima, pode ser uma variável que é uma lista, um range e informar diretamente uma variável.
+
+exemplos:
+
+a- 
+ 
+lista = [1, 3, 5]
+
+nova_lista = [dado *2 for dado em lista] # Aqui ele irá criar um nova lista pegando cada item       
+                                                                    da lista e multiplicando por 2     
+
+b- Podemos fazer um input, o dado aceita quase qualquer coisa.
+
+x = [input() for _ in range(5)] # irá solicitar a entrada de 5 dados.
+
+## Será que dá de fazer uma validação de número primos com list comprehension
+## Funciona tranquilamente com string.  
+
+nome = [‘rafael’]
+
+n = [letra.upper() for letra in nome]   Irá deixa maiúsculas cada letra
+
+POdemos tambem transformar uma lista de numeros em string
+
+nova = str(numero) for numero in lista    # irá transformar a lista acima em uma lista que                                                                                                                        _                                                                   contém string ao invés de int 
+
+
+
+c - Usando estruturas lógicas no list comprehension
+
+lista = [1, 2, 3, 4, 5, 6, 7]
+pares = [par for par in lista if par % 2 == 0]    #  Irá apenas aceitar número par 
+
+Lembrando que o python entende que zero é False e 1 é True
+
+
+Usando if e else:
+
+res = [numeros *2 for numeros else numero / 2 for numero in lista]
+
+Se for par irá multiplicar por 2 e se for ímpar ele irá dividir por 2
+
+
+
+d - Listas Aninhadas - Diferentes de outras linguagens o python não possui um tipo de variável específica para criação de arrays bi-dimencional. Assim alocamos listas dentro de listas
+
+declaração = [[1,2],[3,4]]  # aqui temos o exemplo de uma matriz 2x2
+
+Para acessar a matriz podemos pegar a variavel e aplica dois colchetes. variavel[linhas][colunas]
+
+
+No list comprehension de matrizes, podemos criar uma matriz conforme abaixo:
+
+	matriz = [[i for i in range(5)] for i in range(5)    #aqui irei criar uma matriz 5x5 que irá repertir sempre 0,1,2,3,4 em cada linha
+
+
+Da mesma forma que fizemos anteriormente com testes lógicos, podemos aplicar aqui da mesma form
+	
+	teste = [['par' if x/2 ==0 else 'impar' for x in range(5)] for x in range(10)  #aqui iremos criar uma matriz 10x5 preenchido com par ou impar, repetindo mesmo resultado em cada
+	linha
+
+e - Dict comprehension - Lembrando das caracteristicas de um dicionário e dos comprehensions aprendidos até agora podemos imaginar oque irá vir.
+
+	lista = [x for x in range(10)]   # Usando o exemplos anteriores criei uma lista de 0 a 9
+
+        quadrado = {x: x**2 for x in lista} # Para criar um dicionário em list comprehension actually is pretty simple, just need it to use variable as key and something as value, could
+						it be the same variable as we shown.
+
+	Também podemos acessar cada item de um dicionário existente sem que seja necessário iterar, apesar de sem impossível de a ordered dict.
+
+	Usando o dicionário criado acima, iremos fazer ele voltar ao normal.
+
+	normal = {chave: x ** 0.5 for chave, x in quadrado.items()}  # Usando a função .items(), entramos cada chave e alteramos o valor conforme a necessidade,
+									AInda poderiamos usar um if else ali dentro, fico pensando e se usar um elif, ai fica brabo.
+
+
+
+Uma observação importante é que podemos usar listas de fora deste comprehension para gerar as litas, podemos criar um dicionáiro usando duas listas diferentes. Uma ferramenta interessante,
+é que se usarmos duas listas, podemos acessalas por indice para criar o dicionário. x[i]: y[i] for i in range(1, len(x)) Aqui criamos um dict com base o indice de duas listas diferntes.
+Lembrando que poderiamos usar isso com um split ou em uma palavras para contar seus digitos acessando a string por variavel[i] passaria por cada letra, bem facil para contar letras.
+
+
+
+f - set comprehension - Basicamente o set comprehension é uma lista com todas a funções, só que não aceita valores repetidos. 
+
+  
+	
+IF e ELSE em comprehensions, bem explicado:
+
+
+Resumo:
+
+ x if teste else x*1 for x in iteravel   # Aqui estou mudando o valor de x conforme uma regra lógica 
+
+ x for x in lista if teste               # Repare que é a mesma estrutura da de cima, só que em posições diferentes. Desta vez o if esta sobre o proprio comprehension. Assim ele irá
+                                         # atuar como um filtro. Na verdade com essas duas formas de comprehensions não é preciso de filter, map ou reduce.
+
+Exemplos praticos:
+
+
+lista = [x for x in range(10)]
+lista2 = [x for x in range(1, 10)]
+
+print(all([True if x in 'aeiou' else False for x in 'aif']))
+
+"""
+Perceba que aqui eu iretei usando um regra lógica dentro do comprehension list, se x que irá assumir os 3 valores 'iaf'
+estiver na condição que é if x in aeiou ele retorna True, do contrário False. Oque eu percebi aqui é que o teste logico
+if else dentro de uma declaração de forma simplificada acontece sendo o resultado if condição else resultado falso.
+
+"""
+
+print(all(num for num in lista2 if num % 2 == 0))  
+
+"""
+No exemplo acima o professor errou, a condição que ele quer usando comprehension não é na lista e sim na variável que 
+irá compor a lista. Assim a regra lógica tem de estar no começo que irá para lista iterada (aonde esta o x, para que o x
+seja veradadeiro ou falso) e caso você deseja filtar usando comprehension você deve colocar no final, pois ele irá adi
+cionar na lista apenas caso a condição seja atendida, eu poderia colocar um else e passar outro comprehension também 
+
+"""
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

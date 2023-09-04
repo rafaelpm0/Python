@@ -1,0 +1,366 @@
+Em python temos funções, ou seja, partes de código que resolvem pequenos problemas. Elas servem para que não haja repetição 
+de códigos iguais. Podemos citar a função print(), imagine ter de escrever sempre quando quiser imprimir algo na tela. 
+Partindo desse princípio, podemos ir além das funções build-in (funções já existentes), podemos criar funções.
+
+Primeiro iremos explorar funções que exigem e que não exigem parametros, ou seja, exigem valores de entrada. 
+
+
+1 - Definindo conceitos basicos:
+
+ def nome_da_função(parametros):
+	comando                   #Neste formato é criada a função. def para definir, o nome para nomear, em paresteses os parametros
+					caso tenha, mas sempre terá parenseteses. E os dois pontos para startar a função. Após isso
+					damos a identação para trabalhar dentro da função, igual a um lool. 
+
+a - definir
+
+def imprimir():
+	print('hello')   # Essa função não exige parametros, ela somente executa um código pre-definido. 
+
+
+
+b - chamar a função
+
+Para chamar a função é preciso apenas digitar seu nome() no código que será executado. A função é sempre acima do main, em python não temos main, but whaterver
+
+
+c - função com parametros
+
+
+def imprimir(texto, texto_1):  #Essa função exige parametros, ou seja, valores de entrada sendo eles texto e texto_1. Ali é informado o valor ou variáveis contedo valores adequados.
+	print(texto)            Se chamarmos essa função e informar os parametros, teremos o texto sendo impresso, o texto sendo impresso 2 vezes e o texto_1, sendo impresso
+	print(texto*2)		ao contrário. Assim vemos que as funções server para evitar repetição de código, pois imagine se tiver de fazer isso 100 vezes para diferentes textos.
+	print(texto_1[::-1])    o código iria diminuir consideralvelmente. 
+
+2 - Funções com retorno.
+
+	As funções que utilziam a expressão return em seu final, possuem dois objetivos. A primeira é encerrar a função e seguir com o programa.
+A segunda função é enviar essa informação para fora da função, assim uma função pode retornar um valor, ou n valores. Esse valor pode ser impresso, multiplicado... ARMAZENADO em outra
+variavel. 
+
+    def teste():
+	7 * 7       #caso execute essa função nada ira acontecer, pois dentro da função não há nenhum a ser impresso ou não ha nenhum valor a ser jogado para fora da função
+
+    def teste2():
+	return 7 * 7   #agora ele irá levar para fora da função o resultado da multiplicação, ou seja, é possível imprimir ou armazenar o valor. Assim sua função se torna mais,
+			flexível
+
+	print(teste2())
+	x = teste2()    - print(teste2())     #formar de armazenar e imprimir os valores de uma função
+
+ 
+    def ai():
+	return 'ola'     #no caso acima foi retornado um int, agora foi retornado uma str
+
+
+
+OBSERVAÇÔES IMPORTANTES sobre o return
+a - O return finaliza a função, ou seja, ele leva para fora o resultado e desconsidera as linhas abaixo
+b - Podemos ter uma uma função, mais um return
+c - Um return pode retornar qualquer tipo de dado. 
+
+
+
+def nova_f():
+	num = n
+	if num > 5:
+	    return True
+	return False          #Repare que aqui temos um if else, sem utilziar o else. Pois o bater com o primeiro return a função é encerrada. Assim é possível excluir informações
+				desnecessárias de uma função.  RECURSO MUITO IMPORTANTE
+
+
+
+3 - Funções com parametro. Parametros são valores de entrada que podem ser utilizados para flexibilizar ainda mais as funções. Dentre as funções que ja vimos, podemos citar o print() que 
+aceita como parametro de entrada de qualquer tipo, diretamente ou uma varíavel valorada. Até o momento vimos que função pode não possuir entrada, não possuir saida, não possuir entrada e
+ possuir saida, possuir entrada e não possuir saida e, não possuir entrada e saida. Temos todos os tipos de combinações.
+
+Quando estamos falando de parametros de entrada, estamos trazendo um valor externo para um tratamento interno. Não ha limites para o numero de parametros e estes são separador por 
+virgula
+
+rafa = 4
+isa = 3
+
+def teste(num)
+	return num * num
+
+print(teste(rafa)) # usar a função teste, o valor de entrada 'rafa' foi multiplicado por ele mesmo e a função retorna o resultado. Vale lembrar que ele não imprime, somente
+			retorna o valor 
+
+def teste(num1, num2):
+	print(num1 * num 2)
+
+teste(rafa, isa))  #Agora temos 2 parametros e ele não retorna nenhum valor, porem printa o resultado da operação 
+
+Quando definimos um ou mais parametros em um função, ela somente irá funcionar quando todos os parametros tiverem uma valoração. 
+
+Quando ocorre alguma falta ou excesso nos parametros, é acusa TypeError.
+
+4 - Nomeando parametros. É muito importante saber que podemos nomear os parametros assim é possível alternar sua ordem de inserção desde que acompanhado dos nomes.
+Os paramentros nomeadas são conhecidos como (Keyword Arguments)
+
+
+def hue(a, b)
+	print(a+b)  #Nesta função podemos valorar a e b independente da ordem, desde que seja valorado ex: hue(b=1, a=5) Repare que a ordem esta invertida.
+			CONTUDO, caso não seja informadao a= ou b= ele irá seguir a ordem dos parametros conforme a ordem que esta nos parametros da função.
+
+
+UM DETALHE IMPORTANTE. As variáveis de dentro de uma função não afetam as demais, assim num Keyrword Argumento pode recerber o mesmo nome de uma variavel global. 
+
+
+##### DIFERENÇA DE PARAMETROS DE ARGUMENTOS:
+
+PARAMETROS: São variáveis declara dentro de uma função
+ARGUMENTOS: São variaveis inseridas nas funções
+
+
+######################################################
+
+
+5 - Parametros padrão (Default Parameters) Podemos definir quando a função terá um parametro com valor padrão, assim possibilitando a inserção um argumento opcional.
+
+
+Ex:
+
+def potencia(numero, potencia=2)  #Repare que aqui temos duas variáveis, onde a primeira é obrigatória e a segunda tem por padrão tem o valor de 2, mas pode ser alterada.
+					Caso informe somente uma variável ele irá elevar ao quadrado, caso informe duas ele irá valorar as duas variáveis 
+	print(numero ** potencia)
+
+OBS: em Python é probido colocar Default Parameters at the begnning of sentence, it must be at the end or after the last inputed argument.
+
+
+APENAS LEMBRANDO QUE TUDO QUE FOI MOSTRADO SEPARADO É POSSÍVEL JUNTAR, PODEMOS JUNTAR KEYWORD ARGUMENTS COM DEFAUTL PARAMETERS E JUNTO COM DIFERNTES RETURN EM UMA MESMA FUNÇÃO, 
+É A PARTIR DAQUI QUE O CÓDIGO REALMENTE TOMA COMPLEXIDADE. PODEMOS JUNTAR UM DEFAULT A. COM KEYWORD ARG, ASSIM TEMOS UM FUNÇÃO QUE PODE FUNCIONAR POR PADRAO OU MESMO AINDA NOMEAR,
+SOMENTE ALGUM DOS ARUGMENTOS. 
+
+As vantagens de trabalhar com deaful parameters são a ligibilidade do código é boa, evita erros de parametros e aumenta a flexibilidade do código.
+
+
+5.1 Funções como parametros. Desde que a quantidade de argumentos e a lógica esteja correta é possível aninhar colocar funções como parametros.
+
+
+def soma (num1, num2):
+	return num1+num2
+
+def opera(num1, num2, fun=soma):
+	return fun(num1, num2)                   #Aqui estamo usando a função soma como argumento da função opera e por padrão ela terá o valor da função soma. Esse exemplo
+						  é mais complexo do que parece, pois posibilita a função opera ter muito mais utilidade, pois ela pode retornar qualquer função
+						  que tenha dois argumento como parametros, ou se informamos um valor defult, ela retorna qualquer função que tenha 2 argumentos.
+
+
+
+
+
+6 - Escopo de variáveis em funções.
+
+VARIAVEIS GLOBAIS - Elas estão disponíves para qualquer parte de seu código, porem temos um detalhe importante. Quando entrar em um ambiente local que essas variáveis globais não
+tem validade.
+
+VARIAVEIS LOCAIS - Se não usarmos um return para jogarmos ela para fora da função, ela terá validade somente dentro da função e caso tenhamo um argumento com nomes iguais fora e dentro
+da função, ele serao totalmente indenpentes. 
+
+carro = 5
+
+def modelo():
+	for i in range(carro)  #Irá dar erro pois variável loca carro não foi iniciada, elas são independentes. Será apresentado o erro UnboundLocalError, ou seja, variavel local 
+				não declarada.
+
+
+Podemos usar variáveis globais dentro da função e para isso precisamos informar que estamos usando a variável global:
+
+
+carro = 4
+
+def print():
+	global carro
+	print(carro)  #Aqui ele irá reconhecer que a variável que estamos solicitando é a global.
+
+
+
+6.1 Variaveis locais dentro de funçõe. Podemos criar funções aninhadas onde usamos na segunda ou terceira função uma variável da função de cima.
+
+def fora():
+	contador = 0
+	def dentro():
+	    nonlocal contador      #Repare que aqui estou chamando a variável contador que está localizada na função dentro e que a função fora returna dentro.
+	    contador += 1            Neste caso irá sempre retornar 1, pois é somente um exemplo. Mas é importante repara que sempre será reiniciado o contador
+	    return contador	      toda vez que iniciar a função, pois seu valor estatico é iniciado no inicio da função.
+	return dentro
+
+
+7 - Docstring - Documentando função com Docstrings. Esta é uma dorma de documentar uma função de modo que é possível acessar a informação pelo help(), assim podemos documentar
+		qual o objetivo da função e qual a descrição de cada parametro. Para realizar a documentaço devemos:
+
+
+A - criando o docstring
+
+def teste(num1, num2):
+   """
+   
+   :param num1: Um numero que irá somar
+   :param num2: Outro numero que irá somar
+   :return: o resulta da soma dos parametros
+   """""
+    return num1 + num2
+
+Para documentar, devemos utilizar 3 aspas triplas. Ao dar enter nas aspas triplas o python já entende 2 coisas, ele irá escrever o return para que seja escrito sua função
+e os parametros criados. E você fica livre para fazer oque bem entender.
+
+B - Para acessar o docstring temos 2 formas.
+
+a - Você pode usar o help na função. Ex: print(help(teste))
+
+b - Ou pode usar o comando teste.__doc__ dentro de um print
+
+c - Pode ser acessado pelo terminal. Da mesma forma que acima, porem é preciso importar a função, abra o terminal python. from nomedoarquivo import função
+
+
+
+8 - Argumento *args - O asteristico como parametro possibilita a inserção de qualquer informaçõa ou conjunto de informação que não tenha especificada, ou seja, ela aceita qualquer tipo
+de argumento . O argumento *args pode receber uma lista, pode receber numeros, float... O argumento é iniciado pelo * e a palvra junta dele é mutavel, mas por conveniencia da comunidade
+usamos args. É importante destacar que os argumentos do *args serão sempre convertidos para uma tupla
+
+
+ex
+
+def ex(*args):
+	soma = 0
+	for i in args:   #Sempre esqueco que o for serve para iterar em listas. 
+		soma += i
+	return soma
+
+
+Assim podemos informar por exemplo uma lista, tupla ou set, contendo numeros onde ele podera receber ilimitados valores para retornar a soma dele.
+
+
+def ex(*args):
+	soma = sum(args)
+	return soma       #Simplificando o código acima.
+
+É possível realizar uma lista com diversos argumentos que fazer uma verificação dentro de um if. Basta experiencia
+
+INFORAMACAO IMPORTANTE - Caso coloquemos em uma função o argumento como *variavel, estamos desepacontado essa informação como cada parametro para dentro da função.
+
+def soma(*args):
+    return sum(args)
+
+
+lista = list(range(0, 10))
+
+print(soma(*lista))   #Caso não usemos o asterisco aqui, o args que transformou a lista em argumento não irá conseguir somar um argumento lista, por isso a importancia de desempa-
+cotar.
+
+O aste
+
+
+
+9 -
+
+Funções - **kwargs - 
+
+Da mesma forma que args, o kwargs é definido pela inserção de **variável e não pela variável que vem depois e por convenção é chamado de kwargs. Enquanto *args serve 
+para colocar n argumentos em uma tupla e como * no parâmetro para desempacotar o argumento.  O **Kwargs é feito para informar argumentos nomeados e os transforma em um dicionário.
+
+ex:
+
+def cores(**kwargs):
+	for a, b in kwargs.items():
+		print(f’ {a} e {b}’)
+
+cores = [azul = 10, verde = 50, vermelho = 55‘]
+
+cores(cores)  # irá imprimir a lista cores que foi transformada em um dicionário
+
+
+obs: Os parâmetros *args e **kwargs não são obrigatórios. 
+
+obs sobre dicionário: Se você fizer uma if ‘string’ in dicionário, ele irá iterar em todos os values do dicionário, a busca ocorre primeiro nos values. 
+
+
+Um exemplo mais complexo
+
+def complexo(**kwargs):
+	if ‘pesquisa’ in kwargs and kwargs[‘oi’]= ‘teste’:
+		return ‘olá
+	elif ‘pesquisa’ in kwargs:
+		return ‘funfa’
+
+
+Repare que aqui podemos fazer com que uma lista seja transformada em dicionário e podemos fazer pesquisa e validações dentro desta informação. 
+
+Na função acima, se passarmos a lista [teste=’pesquisa’, oi = ‘teste’] ele irá retornar o primeiro return com valoração ‘olá’.
+
+Caso passarmos tirarmos a variável oi  ou mudarmos seu string para qualquer outra coisa, teremos o segundo return
+
+Ou se trocarmos ou retiramos o valor ou a própria variável teste da lista, não irá retornar nada e acho que não acusa erro
+
+
+
+MUITO IMPORTANTE,
+
+Nas funções ele deve ter a seguinte ordem. Primeiro parâmetros obrigatórios, *args, Parâmetros Default(não obrigatórios) e por último **kwargs, pois caso contrário ele podemos 
+ignorar ou trocar variáveis.Repare que aqui primeiro temos as variáveis que seguem a ordem de entrada, depois as variáveis sem nome, depois variáveis nomeadas com entrada opcional 
+e por último entrada não nomeadas anteriormente. Tomar cuidado com o desempacotamento de valores aqui usando * e ** nos argumentos, pode dar cagada.Apenas reforçando, nos parâmetros 
+*agrs desempacota listas, tuplas ou set e **kwargs nos parâmetros desempacota dicionários (caso usar isso em parâmetros que não sejam dicionários, a chave deve ter o mesmo nome do
+ parâmetro).O desempacotamento é muito bom para preencher uma quantidade fixa de variáveis em funções sem ter que digitar todos seus parâmetros.
+
+
+
+ 10 - Recursividade
+
+ 
+
+
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+

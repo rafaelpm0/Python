@@ -1,0 +1,194 @@
+Listas:
+
+As listas em Python funciona como vetores/matrizes (arrays), funciona da mesma forma que em outras linguans e aceita 
+tipo de dado. As listas em outras linguagens (c/java_ possuem tipo e tamanho fix, ou seja, o array criado possui somente
+um tipo de dado com tamanho fixo, assim ocupando um espaço maior do que o necessário.
+
+As caracteristicas predominantes em python sobre as listas são de que os arrays são:
+- Dinamicos - não possuem tamanho fixo e alocam somente o necessário 
+- QUALQUER tipo de dados é aceito, o array é maleavel, a não ser que seja informado que aceita somente um dado
+
+Criando uma lista. A lista é criada a partir do momento em que iniciamos a variável com []. Exemplo: variavel = []
+
+Alguns exemplos de listas:
+
+1 - lista1 = [] # lista vazia
+2 - lista2 = [5, 6,111, 67,43] # lista somente com inteiros
+3 - lista3 = ['carro', 'ruim', '  ', ' hue'] # Listas somente com str
+4 - lista4 = list(range(19))  # Usando a função list, que transforma o conteudo em uma lista e juntando com range é possível
+fazer com que seja preenchido de 0 a 18, ou qualquer outra variação de range.
+5 - lista 6 = [x for x in range(5)] a mesma função da opção 4.
+obs: CAso você aninha a forma 4 ou 5 com mais um for, gera uma uma matriz: [[x for x in range(5)]for x in range(5)] gera uma matriz de 5x5
+
+
+teste = [1,3,4,6,5,44,66,78,99,'rafa','isa']
+
+
+Aplicações de funções e pesquisa em listas. Vou usar a função teste em todas para facilitar a identificação
+
+1 - Usando if para pesquisa. Percebi que com isso, não é preciso usar um range e uma variavel i para percorrer uma variavel. Basta fazer:
+
+if variavel in lista:
+	comando         #apenas fazendo isto ele já ira percorrer tudo
+
+if 99 in teste:
+	print('Chupa')        #neste caso aqui ele irá dar como verdadeiro
+
+
+2 - Metodo sort() Organiza os valores, sendo numerico ou texte, mas não os dois, tenho de testar. Para usala basta fazer lista.sort() Porem a ordenação não pode ser no print,
+tem de ter aplicado como um comando real para reorganizar. Oraniza a lista e não pode ser aplicado no print, pois não retorna nada. 
+2.1 Metodo sorted() organiza os valores e retorna o valor organizado, não altera a lista. Utilizado quando se quer somente em print
+
+
+No caso da lista acima já esta em ordem, então não muda nada. 
+
+
+3 - Metodo para contar quantas ocorrencias de um valor tem em uma lista. count(argumento)  argumento se numerico, apenas numero. se texto 'texto'. Esta função pode ser usada
+em um print ou para valorar uma variável.
+
+lista.count(4)     #retorna 1
+lista.count('a')   #retorna nada.
+
+4 - Metodo para adicionar um elemento no fim da lista. teste.append(argumento). A função append() como o nome sugere, adiciona um elemento no fim da lista, somente um unico elemento
+sendo ele numerico ou 'texto'. Uma observação importante e que é um diferencial em python é que os lista é MUITO MALEAVEL, ele aceita até que seja colocado outra lista dentro da lista,
+usando por exemplo o append. 
+	Usando a forma de pesquisa com 'in' no topico 1, é possível pesquisa uma listra dentro da lista, porem a lista deve ser identica. Util para pesquisa com condições. 
+
+5 - Metodo para adicionar mais de um elemento na lista teste.extend([variavel, variavel]) - esta função aceita mais adicionar no fim da lista mais de um elemento, porem com a caracte-
+risticas de adioanar SEMPRE mais de um elemento na lista. As chaves são obrigatórioas, e caso queira adiciar listas, precisa ser feito com chaves dentro de chaves,
+
+lista.extend([1, 3, 66, 11])  # neste caso ele irá adicionar 4 variáveis no fim da lista.
+
+6 - Metodo para adicionar um elemento em uma posição específica em uma lista. Para isso é preciso informar o indexador e a variavel, dois elementos obrigatórios nesta função. Além disso,
+vale constatar que o indexador começa do numero zero.
+
+teste.insert(index, variavel) 
+
+7 -É possível somar duas listas diferentes, defina uma terceira variavel como a soma das duas listas, o resultado será a soma das duas listas na ordem correta de cada uma.
+O mesmo princípio se aplica na multiplicação, é como se ele somasse a mesma lista por n vezes.
+
+lista 3 = lista1 + lista2
+
+lista = lista * 44
+
+
+8 - Metodo para interver a ordem das listas.  usando o metodo teste.reverse() ou usando slice de lista, mesma estrutura de slice de strign.
+
+ teste.reverse()
+ou
+ teste[::-1]   
+
+9 - Metodo para copiar a lista. copy()
+
+Neste caso é para criar uma variável independente, porem copiando os valores iniciais de outra.
+
+lista1 = teste.copy()    #há mais coisas a se falar sobre isto, mas é mais avançado
+
+10 - Para contar a quantidade de elementos na listas temos de usar o metodo len(lista). Ele irá retornar q quantidade de elementos na lista
+
+11 - Para remover o ultimo elemento da lista ou pelo seu indexador podemos utilizar o metodo pop(), caso ele seja utilizado sem argumentos ele irá retirar o ultimo elemento.
+Caso colocar somente um numero, será pelo indexador, e desloca todos para esquerda. Tenho de verificar se da de retirar um item específico usando ele.. talvez if x in lista..
+Outro fato interressante é que ele irá retornar o numero que foi retirado da lista, caso deseje fazer um print dele por algum motivo
+
+
+lista.pop()
+
+
+obs: caso o indexador não exista irá retornar erro..
+
+
+12 - Metodo para remover todos os elementos de uma lista varaivel.clear()
+	
+	teste.clear()   #o resultario seria uma lista em branco.
+
+13 - Como transformar uma string em lista. Podemos usar o metodo variavel.split(criterio). Caso não seja informado um critério ele irá entender que é espaço.
+exempo.
+
+
+curso = 'Eu odeio segunda'
+
+curso = curso.split() #seria igual a ['Eu', 'odeio', 'segunda']  # podemos alterar o resultado colocando o critério entre aspas dentro do splite
+
+
+14 - Converter uma lista em string, processo inverso da de cima. 'oque irá ficar entre as variaveis'.join(lista)
+
+
+curso = ' '.join(curso) # neste caso irá transformar exatamente igual a variável original. A diferença é que ' ' pode ser alterado, caso seja ',' a cada junção de variável terá 
+uma virgual. Para excel seria interessante. 
+
+15 - Indexador negativa. Ao tentar imprimir uma litar é possível fazer de tras para frente. Ex
+
+lista = [1, 33, 44, 22]
+print[-2]  # o resultado será 44, ele retorna de tras para frente usando o ultimo elemento com o inxador -1
+
+
+16 - como imprimir o indexador junto do valor da variável na lista. POdemos usar o enumarate(lista) ele irá trazer o indexador junto da variável
+
+for ind, num in enumerate(lista):
+	print(ind, num)  # irá imprimir o numero e sua lista
+
+lista = enumerate(lista)   #se eu fizer isto, acredito que ele irá criar uma lista com dois valores por variável dentro da lista. tem de testar
+
+
+17 - Retornar o indice a partir de um valor de busca. Para isso usamos a função index()   #só procura string 
+
+	lista.index(5)  ou lista.index('rafa')    # em ambos os casos ele irá retornar o primeiro indixe no qual ele encontrar rafa ou 5.
+
+
+	lista.index(5, 6)  # irá procurar o indece correspondente a variável 5 a partir do indice 6
+
+	lista.indez('rafa', 4, 7) irá procurar rafa no indices a partir de 4 a 7.
+
+
+	observar que ele retornar apenas o primeiro na qual ele encontrar
+	
+
+18 - Slicing de string ou listas. O slicing é uma forma de imprimir parcialmente ou totalmentel uma variavel e é possível definir seu passo.
+Funciona de forma igual ao range, só que com variáveis.
+
+Sua extrura é [inicio:fim:passo]  #sendo inicio inclusivo, fim não é inclusivo e o passo é para definir se vai para frente, tras, ou de um em um ou n em n.
+
+
+lista = [1, 33, 44, 22]
+
+print(lista[::-1]) #ira imprimir de tras para frente
+
+
+print(lista[2])   #ira imprimir o indexador 3, numero 22
+
+
+print(lista[::2])   #ira imprimir 1 e 44, pois pula o indexador de 2 em dois
+
+
+print(lista[0:2])  #ira imprimir de 1 a 33
+
+19 - Soma, valor máximo, valor mínimo e tamanho de uma lista.
+
+soma    sum(lista)
+maximo   max(lista)
+minimo   min(lista)
+tamanho  len(lista)    #este aceita qualquer variável, os demais somente numeros reais ou inteiros.
+
+20 - Alem do inverse() da para inverter a lista defininado suas variáveis. 
+
+
+ lista[0], lista[1] = lista[1], lista[0]
+
+21 - Para transformar uma lista em tupla:
+
+	lista = tuple(lista)
+
+
+22 - Desempacotamento de lista, isto é retirar os elementos de uma lista e colocalos como variáveis
+
+
+num1, num2, num3, num4 = lista  #assim as variáveis irão assumir cada valor da lista
+
+obs: O numero de elementos da lista deve igual o numero de elementos da variável, caso contrário irá dar erro.
+
+
+
+
+
+
+

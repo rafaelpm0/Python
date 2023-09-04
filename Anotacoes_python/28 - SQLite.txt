@@ -1,0 +1,153 @@
+O SQLite é um banco de dados "resumido" para que seja possível ter um banco mais simples.
+O SQLITE Studio é um executavel, como se fosse um aplicativo já instalado e diferente do MYSQL não precisa de um servidor para rodar, somente o banco.
+
+O objetivo é saber como criar, gravar, manipular SQLlite em python
+
+
+Para usar o SQLite é preciso importar o sqlite3.
+
+
+
+1 Conexão com o banco:
+  Normalmente para fazer a conexão com o banco será preciso informar o caminho, e criar uma função para realizar um teste se a conexão funciona, do contrário se apenas fizermos a conexao e der ruim, o sistema ir dar crash. 
+
+Para fazer a conecao com o banco é comum criar uma funcao para testar essa conecao
+e nos retornar um error. Para isso informamos o caminho e por padrão definimos a conexao como con.
+
+
+def ConexaoBanco():
+    caminho = "C:\\Users\CHARLES\\PycharmProjects\\Aulas\\sqlteste.db"
+    con = None
+    try:
+        con = sqlite3.connect(caminho)
+    except Exception as erro:
+        print(erro)
+
+    return con
+
+ConexaoBanco()
+
+
+obs: Igual quando estamos trabalhando com txt o metodo connect criar um arquivo .db (database) caso o informado não existir.
+
+
+
+A - Comandos SQL, irei deixar os comando sql informado de forma separa aqui. Os comando SQL devem ser escritos como se fossem string e letras maiusculas.  
+
+ 1 - Para criar tabela:
+
+  ex = "CREATE TABLE nome da tabela(
+          NOME DA COLUNA CARACATERISTICAS, #separados por virgula cada tela e no final apenas fecha parenteses e coloca ponto e virgula como delimitador
+          );
+
+  1.1 Exemplo pratico:
+
+vsql = "CREATE TABLE tb_contatos(N_IDCONTATO INTEGER PRIMARY KEY AUTOINCREMENT," \
+     " T_NOMECONTATO VARCHAR(30), " \
+     "T_TELEFONECONTATO VARCHAR(14), " \
+     "T_EMAIL VARCHAR(30) );""   
+
+ obs: As aspas e \ é apenas como o python pula linha de string sozinho..
+
+
+2  - Inserindo valores em tabelas.
+
+Para realizar a inserção devemos utilizar o comando sql:
+
+INSERT INTO TABELA (NOME DAS COLUNAS SEPARA POR VIRGULA)
+VALUES (CONTEUDO DE CADA TABELA INFORMADA)  
+
+a insecao que irei usar abaixo sera:
+
+
+INSERT INTO tb_contatos('T_NOMECONTATO', 'T_TELEFONECONTATO', 'T_EMAIL') VALUES ('Rafael', '(48)99838-5803', 'rafaelpmedeiros00@gmail.com');
+
+Para praticar, usei um decorador para pode fazer qualquer inserção de dados, ficou bom, porem teria de trabalhar como usar melhor na pratíca.          
+
+
+O ideal é fazer igual com e usar um try.
+Na execução iremos usar o cursor(), execute() e iremos adicionar o commit() que possui o objetivo de confirmar a mudança no banco, do contrário a mudança será aplicada somente no momento da execução, após a execução encerrar o banco volta para seu estado antes da exceução.
+
+
+
+def criartabela(conexao, sql):
+    try:
+        c = conexao.cursor()   # instanciando o objeto conectado ao banco, cursor habilita a manipulacoa do banco
+        c.execute(sql)         # o metodo excecute() possibilita a execucao de comandos sql
+        print('Tabela criada.')
+
+    except Exception as error:    # apenas para lembrar que o Exception puxa todo erros, coisa de preguiçoso
+        print(error)
+
+
+def inserir(conexao, sql):
+    try:
+        c = conexao.cursor()
+        c.execute(sql)
+        conexao.commit()
+        print('Inserção bem sucedida.')
+
+    except Exception as error:
+        print(error)
+
+
+def d_inserir(tabela, *colunas):
+    def decorador(funcao):
+        def resultado():
+            sql = f"INSERT INTO {tabela}" \
+                  f"{colunas}" \
+                  f" VALUES {funcao()};"
+            return sql
+        return resultado()
+    return decorador
+
+
+@d_inserir('tb_contatos', 'T_NOMECONTATO', 'T_TELEFONECONTATO', 'T_EMAIL')
+def dados():
+    teste = 'Rafael', '(48)99838-5803', 'rafaelpmedeiros00@gmail.com'
+    return teste
+
+
+inserir(vcon, dados)
+
+3 - Deletando. A partir de agora irei apenas mostrar os comandos, pois todas as ferramentas para executar o comando já foram apresentadas. Lembrando que precisamos somente do 
+conexao.cursor()
+conecao.cursor().execute()
+coneccao.commit()
+
+sql = "DELETE FROM tb_contatos WHERE N_IDCONTATO = 1"
+
+Assim temos DELETE FROM tabela WHERE coluna = x
+
+
+4 - Atualização do banco de dados. Para atualizarmos registros já existentes temos de usar o comando: UPDATE tabela SET nome da(s) coluna(s) = valor desejadao WHERE condicao de procura.
+A cada coluna que for setada é preciso colocar virgula
+
+
+Exemplos: x = "UPDATE tb_contatos SET T_NOMECONTATO = 'Cansei', T_TELEFONECONTATO = 44"  Caso usemos assim ira dar um update na lista inteira por isso precisamos que setar o WHERE
+
+exemplo correto = "UPDATE tb_contatos SET T_NOMECONTATO = 'Cansei', T_TELEFONECONTATO = 44 WHERE N_IDCONTATO = 2"
+
+
+5 - Consulta no banco de dados. Para realizar a consulta temos alguns parametros a mais. Primeiro ao invez de usar o commit() temos de usar conexão.cursor().execute(sql).fetchall(), onde irá retornar um uma tupla por linha contendo as informações (deve ser usado tupla por ser imutável).
+
+Exemplo de uma consulta com try, acredito que sempre irei usar assim, pois não posso deixar dar erro e para o programa quando 
+
+def consultar(conexao, sql):
+    try:
+        c = conexao.cursor()
+        c.execute(sql)
+        resultado = c.fetchall()
+        return resultado
+
+    except Exception as error:
+        print(error).
+ 
+
+ Comando sql  x = "SELECT * FROM tb_contatos"  Aqui estamos fazendo uma consulta em toda tabela tb_contatos. Podemos usar o WHERE para nos ajudar a realizar filtro
+
+ x = "SELECT * FROM tb_contato WHERE N_IDCONTATO=2" .
+
+ Caso não usemos o * para buscar tudo, podemos indicar as colunas separando cada uma delas por virgula
+
+ A consulta precisamos que seja armazenada em uma variável ou direto em um loop for

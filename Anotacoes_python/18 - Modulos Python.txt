@@ -1,0 +1,140 @@
+Os modulos são basicamente uma biblioteca, onde informações e funções são importadas. Temos os mudolos build-in, integrados com a linguagem python, os modulos que podem ser importados do proprio python, modulos de terceiros e modulos proprios.
+
+Para invocar um modulo precisamos realizar o import dele, ou seja, carregar as informações deste modulo na memória. 
+
+Assim somos habilitados a USAR VARIAVEIs, ATRIBUTOS, CLASSES E PROPRIEDADES.
+obs: Sempre é importado no começo do modulo.
+
+
+Abaixo segue algumas formas de importação:
+
+1 - import nome do modulo  # Assim carregamos todo o modulo na memoria e podemos acessar deste modulo da seguinte forma: nome do modeulo.variavel
+
+ex:
+
+import random
+
+random.random()   #Aqui eu estou invocando o modulo random (o pacote random) e com o ponto estou solicitando acesso a uma de suas estruturas, neste caso o random
+
+Basicamente podemos importar qualquer modulo, ou seja, qualquer arquivo .py. Lembre que todos os arquivos que eu criei poderiam ser importados.
+
+import nome do modulo  # QUE ISSO FIQUE BEM CLARO
+
+
+2 -from nome do modulo import variavel/funcao # Assim estou importando apenas uma parte do modulo e não preciso usar o nome do modulo e ponto, basta usar a variável solicitada
+                                                pois, neste caso a função é integrada ao modulo em uso. Cuidado para não ocorrer conflito de nome de variáveis
+
+from random import random
+
+random()
+
+
+3 - Da forma u1 ou 2, podemos usar as para renomear o recurso importado
+
+
+import random as rd
+
+rd.random()
+
+
+from random import randint as rin
+
+
+rin()
+
+
+obs: Podemos importar mais de uma função de uma vez apenas é preciso usar a virgular
+
+from random import shuffle, randint 
+
+obs2: Tambem podemos renomear multiplas variaveis
+
+from random import shuffle as s, randint as t
+
+obs3: Importando multiplas funçoes com tupla
+
+from random import (
+    randint as r,
+    random as r1
+)
+
+4 - Usando asterisco from random import*   # Assim ele irá incorporar todas as funções do módulo
+
+from random import*
+
+5 - Sobre o modulo random:
+
+
+import random
+
+a - random():
+
+print(random.random())  # Ele irá gerar um numero aleatório entre > 0 e < 1  acho que é isso, ele irá retornar um float aleatório
+
+b - uniform(int, int)  # irá gerar um numero aleatório entre o primeiro numero e o ultimo mumero, sendo o ultimo não incluso. Este numero será um float com um penca de casas pos virgula
+
+    print(uniform(5, 9)) # irá gerar um numero aleatório entre 5 e 8, o 9 não é incluir   
+
+c -  randint(int, int) # Gera numeros interios dentro do intervalo informado, sendo o ultimo não incluso. 
+
+     print(randint(1, 50)) gera um numero aleatório entre 1 e 50
+
+
+d - choice(varivel) - Mostra um valor aleatório de um interavel
+
+x = ['rafa', 'isa', 'teste']
+
+print(random.choice(x))  # Irá imprimir um dos três. 
+
+
+e - shuflle(iteravel) # Ele irá embaralhar a variável, igual sort() ele retorna None, ou seja, ele embaralha a propria variável e não gera uma nova.
+
+
+6 - Instalando modulos build-in python:
+
+    Para realizar a instalação de pacotes em python utilizamos o gerenciador de pacotes, em python chamado de PIP - Python Installer  Package
+
+    Os pocotes em python estão disponíveis em pypi.org  - Há dezenas de pacotes para serem trabalhados.
+    
+    no cmd digite pip que ele irá listas todas as bibliotecas disponíveis. Da de fazer alguns testes. Tome cuidado pois oque esta instalado no ambiente virtual não é visto de fora, por isso ele usou o terminal dentro do python o qual já estamos na pasta que possui este ambiente virtual. 
+
+   Não irei falar sobre o colorama pois é meio desnecessário.
+
+
+7 - Pacotes:
+
+     Pacotes em python são uma coleção de módulos, onde cada modulo é um arquivo que contem dados ou funções. Assim quando estamos criando um programa ele é todo subdivido em pacotes e modulos. Será como criar uma pasta cada modulos por assim dizer. Nas versões mais antigas de python ao criarmos um pacote, ele gera um arquivo chamado __init__.py, atualmente não precisa, mas para manter a compatibilidade ele continua gerando esse arquivo. Para criar um pacote basta ir em file, new, package ou python file e será criar. Dito isso não há mais muito oque mostrar, além disso basta criar as estruturas com cuidado e lembrar que cada informação pode ser acessada de qualquer lado huehue.
+
+
+8 - Dunder main e Dunder name. Isto se refere a dobleunder main e name. São formas de se referenciar a parte principal do arquivo. Em python, diferente de outras linguaguens na qual iniciomos um arquvico com main, o proprio python já cria esta referncia. Porem podemos informar a parte principal de um programa manualmente usando doble under main, mas qual o objetivo com isso. Simplesmente para poder executar a parte principal do programa e suas funções de forma separada caso seja preciso. Como cada arquivo tem seu proprio nome, assim podemos separa o principal de cada arquivo. Dentro do arquivo sempre será chamado de main e quando ele for importado o nome irá mudar de main para o nome do arquivo, ou seja, o python atribui o __name__ como main quando a excecução ocorre no arquivo onde foi declarado e __name__ como o nome do arquivo quando ele for executado de outro modulo após um import.
+
+doble name -  __name__
+
+doble main - __main__
+
+
+Vamo dizer que o arquivo de chama aula.py - Caso executarmos a aplicação direto no arquivo __name__ será igual a __main__ e quando for via import __name__ é igual a aula.py
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+

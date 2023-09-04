@@ -1,0 +1,247 @@
+1 - Herança (inheritance) - A herança seria uma forma de reaproveitar código e/ou extentar atributos e métodos para outras classes.
+
+
+a - conceito geral
+
+A ideia na heranca é usar um classe pai/mae... que seja generica o sufuciente para que classes derivadas possam absorver seus metodos e classes para uso proprio
+
+class Pessoa:
+    def __init__(self, nome, sobrenome, cpf):
+        self.nome = nome
+        self.sobrenome = sobrenome
+        self.cpf = cpf
+
+    def imprimir(self):
+        print(f'Nome = {self.nome}, Sobrenome {self.sobrenome} e cpf {self.cpf}')
+
+
+class Cliente(Pessoa):                                           #Aqui temos um exemplo de herança, usando dentro de parenteses a classe heradada e o super._init para inicar os atributos
+    def __init__(self, nome, sobrenome, cpf, limite, renda):      herdados. Repare que os atributos mesmo sendo herdados, na função __init__ é preciso declarar suas variáveis 
+        super().__init__(nome, sobrenome, cpf)
+        self.limite = limite
+        self.renda = renda
+
+
+t1 = Cliente('Rafael', 'Pinho Medeiros', '092281179230', '5000', '2150')
+t1.imprimir()
+
+
+Perceba que a classe Cliente, herda tudo da Classe Pessoa, em relação aos atributos pode herdar todos ou somente os que forem declarados e referente aos métodos herda todos. Oque pode ocorrer é que ao criar um método com o mesmo nome da classe pai, o metodo é sobreescrito.
+
+A classe que cede seus atributos e metodos é conhecida por classe, Super Classe, C. Mãe, C. Pai, C. Base, C. Genérica.
+Enquanto a classe que recebe é conhecida por, Sub Classe, C. filha e C. Específica. 
+
+b - metodo privado e __dict__
+
+Após cada atributo, caso seja informado __ após o ponto esse atributo vira privado ou seja só é possível acessa-los por metodos e não diretamente teste.nome, isso ocasionaria erro. Enquanto após o objeto se colocar-mos p1.__dict__ ele irá gerar um dicionário com cada informação dos atributos. 
+
+
+class Pessoa:
+    def __init__(self, nome, sobrenome, cpf):
+        self.__nome = nome
+        self.__sobrenome = sobrenome
+        self.__cpf = cpf
+
+    def imprimir(self):
+        print(f'Nome = {self.__nome}, Sobrenome {self.__sobrenome} e cpf {self.__cpf}')
+
+
+
+p1 = Pessoa('Rafael', 'Pinho Medeiros', '092281179230')
+
+print(p1.__dict__)
+
+
+Para acessar um atributo privado de forma incorreta, porem util em testes, podemos simplesmente fazer p1._Pessoa__nome, assim deve usar objeto_Classe__Atributo e assim conseguimos acessar.
+Quando estamos usando o super() para criar uma iniheritance e iremos acessar de forma errada um atributo privado, precisamos usar a classe mãe para acesssa e não a classe herdeira. 
+
+
+C - Overriding - Como mencionado anteriormente ocorre quando criamos na classe filha um novo metodo que possui o mesmo nome do metodo da classe pai, assim o sobreescrevendo na classe filha 
+
+
+d - Properties - QUANDO ESTIVER DESENVOLVENDO VERIFICAR NOVAMENTE ISSO
+
+
+A diferença entre metodos set e get, mais comumente tratado em java, os metodos set nada mais é do que o nosso contrutir __init__ ou seja, você esta definindo seus atributos ou por meio de um metodo você esta alterando os atributos de alguma forma, enquanto os metodos get como o numer seguere são metodos para acessar as informações do set.
+
+Em python realizamos os metodos get por meio do decorador @property, assim para acessalos quando está com este decorador não precisamos dos ()
+
+
+class Pessoa:
+
+    contador = 0
+
+    def __init__(self, nome, sobrenome, cpf):
+        self.__id = Pessoa.contador
+        self.__nome = nome
+        self.__sobrenome = sobrenome
+        self.__cpf = cpf
+        Pessoa.contador += 1
+
+    def imprimir(self):
+        print(f'Nome = {self.__nome}, Sobrenome {self.__sobrenome} e cpf {self.__cpf}')
+
+    @property               # Exemplo de property. Mas isso só irá servir para metodos GET.
+    def g_cpf(self):
+        return self.__cpf
+
+
+p1 = Pessoa('Rafael', 'Pinho Medeiros', '092281179230')
+teste = p1.g_cpf
+print(teste)
+
+
+Agora quando formos alterar o valor de um atributo precisamos contruir um setter em pytho e para isso usamos @get.settern e a função
+
+    @g_cpf.setter
+    def set_cpf(self, novo):
+        self.__cpf = novo
+
+Segue exemplo de como criar um método para que possamos definir um novo cpf de um atributo privado. Caso o nome da função setter tivesse sido apenas g_cpf teria criado um poliformismo ou seja, quando fosse apenas solicitada a função sem nenhum parametro, ele iria me retornar como um get, e quando eu informar um parametro ele irá redefinir esta parametro
+
+ 
+
+E - Metodo Super. O metodo super() é utilizado como construtor para classes filho que herdam caracteristicas das classes pai. Não sei porque o mais correto é usar super ao invez de realizar 
+    um __init__ com a classe pai.
+
+
+
+
+class Pessoa:
+
+    contador = 0
+
+    def __init__(self, nome, sobrenome, cpf):
+        self.__id = Pessoa.contador
+        self.__nome = nome
+        self.__sobrenome = sobrenome
+        self.__cpf = cpf
+        Pessoa.contador += 1
+
+    def imprimir(self):
+        print(f'Nome = {self.__nome}, Sobrenome {self.__sobrenome} e cpf {self.__cpf}')
+
+
+Exemplo com super()
+
+class Cliente(Pessoa):
+    def __init__(self, nome, sobrenome, cpf, limite, renda):
+        super().__init__(nome, sobrenome, cpf)
+        self.limite = limite
+        self.renda = renda
+
+Exemplo com a classe pai
+
+class Cliente(Pessoa):
+    def __init__(self, nome, sobrenome, cpf, limite, renda):
+        Pessoa.__init__(nome, sobrenome, cpf)
+        self.limite = limite
+        self.renda = renda
+
+
+
+F - Herança multipla - A herença multipla ocorre quando uma classe herda de duas ou mais classes seus atributos e métodos, ou, quando herda de uma classe na qual esta já tenha herdado outra classe. Assim classificamos a herança multipla sendo como direta, quando a classe recebe mais de uma classe ou indireta quando a classe recebe outra classe que possui herança, ambos os métodos estão corretos. que fique claro isso. 
+
+
+Exemplo de herança indireta
+
+class Pessoa:
+
+    contador = 0
+
+    def __init__(self, nome, sobrenome, cpf):
+        self.__id = Pessoa.contador
+        self.__nome = nome
+        self.__sobrenome = sobrenome
+        self.__cpf = cpf
+        Pessoa.contador += 1
+
+    def imprimir(self):
+        print(f'Nome = {self.__nome}, Sobrenome {self.__sobrenome} e cpf {self.__cpf}')
+
+
+class Cliente(Pessoa):
+    def __init__(self, nome, sobrenome, cpf, limite, renda):
+        super().__init__(nome, sobrenome, cpf)
+        self.limite = limite
+        self.renda = renda
+
+
+class Vip1(Pessoa, Cliente):
+    def __init__(self, nome, sobrenome, cpf, limite, renda):
+        Pessoa.__init__(nome, sobrenome, cpf)
+        Cliente.__init__(limite, cpf)                            #Não consegui utilizar com super
+
+
+        
+
+# Perceba que aqui foi herdado por meio da classe cliente, as classes PEssoa e Cliente para classe vip, em contraste, no exemplo abaixo temos um ótimo exemplo de herança direta. Outro detalhe importente é sobre Method Resolution Order, o metodo de resolução de ordem é feito para quando fizermos uma classe herdar os metodos de outra classe, ou seja apenas colocando como herdeira ela já puxa os metodos, mas e se tiver metodos com o mesmo nome. Por conveniencia ela irá puxar oque foi declarado primeiro para herdar. Ex: Na classe acima se pessoa e cliente tivessem um método imprimir(), como a classe pessoa vem primeiro, logo o metodo imprimir disponível na classe Vip1 seria da Pessoa.
+
+OBS: temos um função chamado isinstance. Ela recebe como parametros o objeto e a classe e ela irá retronar true or false, lembrando que também retorna como verdadeiro quando a classe passada como parametro é uma das classes herdadas.
+
+g - Poliformismo - Poliformismo signigica muitas formas ou seja, é basicamente um overrind de funções ao usar heranças. Sinceramente esperava mais, achei q era tipo em java onde poliformismo nos tras uma possibilidade de integrar diversas funções com mesmo nome, porem sendo diferenciadas por meio de seus atributos. 
+	O interessante do poliformismo nesse momento é na classe pai criar um metodo com raise NotImplementedError('frase'), lembrando que o raise causa gera um erro, assim quando na classe filha esse metodo for invocado ele irá apenas ocasionar um erro e caso fizermos um overriding, estamos gerando o metodo em si dentro da classe. 
+
+
+h - Metodos magicos - Apesar do nome ser uma merda, quando estamos criando uma classe, devemos lembrar que as classes python são escritas em letras minusculas. Então existem algumas funções em python que quando criamo uma versão dela dentro de uma classe, mudamos o comportamento dessa função quando o objeto passado como parametro fazer parte da classe em questão.
+
+   Os metoso mágicos, são todos os métodos iniciados por __ Dobule Underscore
+
+   Dentro dos metodos mágicos temos algo bem interessante que são os metodos __repr__ e __str__, suas funções são as mesmas, porem quando temos os dois o __str__ tem prioridade. Elas servem para criar uma represenção do objeto ou um print/retorno de uma string de suas informações. Elas servem para quando formos printar o objeto tenhamos uma representação legivel do objeto e não apenas seu espaço na memória. 
+
+
+	class Livro:
+    def __init__(self, titulo, autor, paginas):
+        self.titulo = titulo
+        self.autor = autor
+        self.paginas = paginas
+
+    def __repr__(self):
+        return f'O nome do livro é {self.titulo}, escrito por {self.autor}'
+    
+    def __str__(self):
+        return f'O nome do livro é {self.titulo}, escrito por {self.autor}'
+
+
+
+Agora imagine se eu tentar aplicar a função len em um objeto instanciado com a classe livro, irá retorar erro, pois o python não sabe oque fazer com isso. Porem se definirmos um __len__, poremos cirar oque deve ser retornado 
+
+class Livro:
+    def __init__(self, titulo, autor, paginas):
+        self.titulo = titulo
+        self.autor = autor
+        self.paginas = paginas
+
+    def __repr__(self):
+        return f'O nome do livro é {self.titulo}, escrito por {self.autor}'
+
+    def __str__(self):
+        return f'O nome do livro é {self.titulo}, escrito por {self.autor}'
+
+    def __len__(self):
+        return self.paginas
+
+
+l1 = Livro('Um livro', 'Um Autor', 5432)
+
+print(len(l1))  # irá retornar 5432.
+
+Alem do metodo __len__ temos muitos outros
+
+1 - __del__ para após deletar mostrar oque ocorreu
+
+2 - __add_(self, others #pode mudar a variavel) assim ele ira realizar uma operaçao de soma entre dois objetos, determina oque ocorre
+
+3 - __mult__(self, others) #define oque irá ocorre numa multiplicação da classe. Na aula foi usada a função isistance(objeto, tipo(int,str,boll,list) para verificar qual o tipo do objeto
+			   até porque não faria sentido multiplica com um outro objeto
+
+4 - 
+			
+
+
+
+
+
+
+
+

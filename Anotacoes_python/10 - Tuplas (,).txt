@@ -1,0 +1,58 @@
+	Tuplas ou tuples em ingles é uma forma de armazenar informações no formato de listas, mas de forma imutável. É possível reescrever uma tupla, mas os metodos de 
+adicionar, alterar ou remover um item não funcionam. É muito utíl com informações estaticas.
+	A linha de riocínio segue a mesma das lista, irei usar estas anotações mais para revisar oque já foi visto.
+	Visualmente as tuplas são definidas por parenteses ao inves de chaves como nas liastas, mas oque realmente define uma tupla é a virgula
+
+	tuplas = (1, 44, 'rafa', 414, 69)
+	tupla = 1, 55, 99, 10, 00           ambas são exemplos validos de tuplas
+	
+	exemplo = 66
+	exemplo = 44,     #Somente o segundo exemplo é uma tupla, mesmo se colocassemos paratenses neles, ainda sim somente o segundo seria uma tuplas, pois oque define
+				uma tuplas é a virgula.
+
+Metodos de adição e remoção de elementos não funcionam na tupla. Por isso uma segurança mais a trabalhar com tuplas para dados inertes. Apenas tomar cuidado pois é
+possível sobreescrever uma tupla.
+
+
+
+
+1 - Podemos gerar uma tupla com range
+
+	variavel = tuple(range(12))    #irá gerar de 0 a 11. acho... não lembro huehue 
+
+		
+2 - Desencapsulamento de tupla
+
+	num1, num2, num3 = tupla   #gera erro caso o numero de elementos da tupla seja diferente do numero de variáveis que irão receber os valores
+
+3 - Soma*, maximo, tamanho e minimo
+
+sum(tupla)   #somente com numeros reais ou inteiros.
+max(tupla)
+min(tupla)
+len(tupla)    retonar o valor da soma, maximo, minimo e a quantidade de elementos (não importa o tipo de dados)
+
+4 - Verificar se tem algum dado especifico na tupla
+
+dado in tupla    da para usar em um if else ou para ver se é verdade
+
+5 - imprimir indice junto do numero usando enumerate()
+
+for indice, valor in tupla:
+	print(indice, tupla)
+
+
+6 - contar um item específico dentro a tupla
+
+tuplas.count('s') ira contar quantas ocorrencias de s existem. funciona em string também
+
+
+7 - Encontrar o indexador de uma informação dentro da tupla
+
+		tupla.index('pesquisa')   # caso tenha a palavra pesquisa irá retonar o numero o indice que está, apenas o primeiro.
+
+8 - 
+  
+
+
+
